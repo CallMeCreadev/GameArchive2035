@@ -1,0 +1,8 @@
+Sysadmins are users with limited authority
+We have restricted their accounts to prevent the use of most Linux commands that may interfere with our files
+The following Commands are enabled to give sysadmins a ReadOnly style of permission
+
+cd [directory] can be used to move to a specific directory or cd.. can be used to leave the current directory
+ls can be used to list the contents of the directory. We have enabled the extension -a so that sysadmins can view hidden files using ls -a
+cat can be used to print the content of text files to the terminal but we have restricteed file concatenation
+clear is enabled so sysadmins can navigate the terminal with greater usability

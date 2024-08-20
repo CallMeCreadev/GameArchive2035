@@ -1,0 +1,8 @@
+Buckshot Yankee was the codename for a significant cyber intrusion into U.S. military networks occuring in 2008. 
+The breach is believed to have been conducted by Russian operatives.
+The operation’s objective was to infiltrate classified U.S. military networks and gather intelligence.
+The attack began when an infected USB flash drive was inserted into a laptop connected to the U.S. Central Command’s network.
+When the drive was inserted into a computer, the malware automatically executed, leveraging the Windows Autorun feature. 
+Once executed, the malware, known as Agent.btz, created a backdoor on the infected systems.
+The malware spread through classified and unclassified networks, exfiltrating sensitive data back to the attackers.
+In response to Buckshot Yankee, the Department of Defense banned the use of USB drives on military networks and initiated widespread network security improvements.

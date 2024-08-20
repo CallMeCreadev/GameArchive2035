@@ -1,0 +1,233 @@
+﻿@using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Components.Web
+@using Archive2035.Components
+
+<div class="main-container">
+    @if (isLockoutActive)
+    {
+        Console.WriteLine("App: Entering Lockout State");
+        <LockoutComponent OnResetGame="HandleGameReset" />
+    }
+    else
+    {
+        @if (currentState == GameState.Login)
+        {
+            Console.WriteLine("App: Entering Login State");
+            <LoginComponent OnLoginSuccess="HandleLoginSuccess" />
+        }
+        else if (currentState == GameState.MemberFileBrowsing)
+        {
+            Console.WriteLine("App: Entering MemberFileBrowsing State");
+            <MemberFileBrowserComponent OnTriggerGame="HandleTriggerGame1" OnEliteModeSettings = "HandleEliteModeSettings" />
+        }
+        else if (currentState == GameState.GameSegment1)
+        {
+            Console.WriteLine("App: Entering GameSegment1 State");
+            <GameSegment1Component OnGameComplete="HandleGameComplete1" OnGameLockout="HandleGameLockout" />
+        }
+        else if (currentState == GameState.SecureFileBrowsing)
+        {
+            Console.WriteLine("App: Entering SecureFileBrowsing State");
+            <SecureFileBrowserComponent OnTriggerGame="HandleTriggerGame2" />
+        }
+        else if (currentState == GameState.GameSegment2)
+        {
+            Console.WriteLine("App: Entering GameSegment2 State");
+            <GameSegment2Component OnGameComplete2="HandleGameComplete2" OnGameLockout="HandleGameLockout" />
+        }
+        else if (currentState == GameState.MainFrameFileBrowsing)
+        {
+            Console.WriteLine("App: Entering MainFrameFileBrowsing State");
+            <MainFrameFileBrowserComponent OnTriggerGame="HandleTriggerGame3" />
+        }
+        else if (currentState == GameState.GameSegment3)
+        {
+            Console.WriteLine("App: Entering GameSegment3 State");
+            <GameSegment3Component OnGameComplete3="HandleGameComplete3" OnGameLockout="HandleGameLockout" />
+        }
+        else if (currentState == GameState.ClassifiedFileBrowsing)
+        {
+            Console.WriteLine("App: Entering ClassifiedFileBrowsing State");
+            <ClassifiedFileBrowserComponent OnTriggerGame="HandleTriggerGame4" />
+        }
+        else if (currentState == GameState.GameSegment4)
+        {
+            Console.WriteLine("App: Entering GameSegment4 State");
+            <GameSegment4Component OnGameComplete4="HandleGameComplete4" OnGameLockout="HandleGameLockout" />
+        }
+        else if (currentState == GameState.GatewayFileBrowsing)
+        {
+            Console.WriteLine("App: Entering GatewayFileBrowsing State");
+            <GatewayFileBrowserComponent OnTriggerGame="HandleTriggerGame5" />
+        }
+        else if (currentState == GameState.GameSegment5)
+        {
+            Console.WriteLine("App: Entering GameSegment5 State");
+            <GameSegment5Component OnGameComplete5="HandleGameComplete5" OnGameLockout="HandleGameLockout" />
+        }
+        else if (currentState == GameState.VictoryScreen)
+        {
+            Console.WriteLine("App: Entering VictoryScreen State");
+            <VictoryScreenComponent />
+        }
+        else if (currentState == GameState.EliteModeSettings)
+        {
+            Console.WriteLine("App: Entering Elite Mode Settings State");
+            <EliteModeSettingsComponent OnBeginEliteMode="HandleEliteMode" />
+        }
+        else if (currentState == GameState.EliteMode)
+        {
+            Console.WriteLine("App: Entering Elite Mode State");
+            <EliteModeComponent />
+        }
+    }
+</div>
+
+@code {
+    private GameState currentState = GameState.Login;
+    private bool isLockoutActive = false; // Flag to determine if the lockout screen is active
+
+    [Inject] IJSRuntime JSRuntime { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("App: OnInitializedAsync called");
+        await JSRuntime.InvokeVoidAsync("initializeNavigation");
+    }
+
+    private void HandleLoginSuccess()
+    {
+        Console.WriteLine("App: HandleLoginSuccess called");
+        currentState = GameState.MemberFileBrowsing;
+        ResetLockout(); // Reset lockout flag on successful login
+        UpdateNavigationState();
+    }
+
+    private void HandleGameReset()
+    {
+        Console.WriteLine("App: HandleGameReset called");
+        ResetLockout(); // Ensure lockout is reset
+        currentState = GameState.Login; // Set the state to login
+        StateHasChanged(); // Trigger UI update
+    }
+
+    private void HandleTriggerGame1()
+    {
+        Console.WriteLine("App: HandleTriggerGame1 called");
+        currentState = GameState.GameSegment1;
+    }
+
+    private void HandleGameComplete1()
+    {
+        Console.WriteLine("App: HandleGameComplete1 called");
+        currentState = GameState.SecureFileBrowsing;
+    }
+
+    private void HandleTriggerGame2()
+    {
+        Console.WriteLine("App: HandleTriggerGame2 called");
+        currentState = GameState.GameSegment2;
+    }
+
+    private void HandleGameComplete2()
+    {
+        Console.WriteLine("App: HandleGameComplete2 called");
+        currentState = GameState.MainFrameFileBrowsing;
+    }
+
+    private void HandleTriggerGame3()
+    {
+        Console.WriteLine("App: HandleTriggerGame3 called");
+        currentState = GameState.GameSegment3;
+    }
+
+    private void HandleGameComplete3()
+    {
+        Console.WriteLine("App: HandleGameComplete3 called");
+        currentState = GameState.ClassifiedFileBrowsing;
+    }
+
+    private void HandleTriggerGame4()
+    {
+        Console.WriteLine("App: HandleTriggerGame4 called");
+        currentState = GameState.GameSegment4;
+    }
+
+    private void HandleGameComplete4()
+    {
+        Console.WriteLine("App: HandleGameComplete4 called");
+        currentState = GameState.GatewayFileBrowsing;
+    }
+
+    private void HandleTriggerGame5()
+    {
+        Console.WriteLine("App: HandleTriggerGame5 called");
+        currentState = GameState.GameSegment5;
+    }
+
+    private void HandleEliteModeSettings()
+    {
+        Console.WriteLine("App: EliteModeSettings called");
+        currentState = GameState.EliteModeSettings;
+    }
+
+    private void HandleEliteMode()
+    {
+        Console.WriteLine("App: EliteMode called");
+        currentState = GameState.EliteMode; // Transition to EliteMode instead of EliteModeSettings
+    }
+
+
+    private void HandleGameComplete5()
+    {
+        Console.WriteLine("App: HandleGameComplete5 called");
+        currentState = GameState.VictoryScreen;
+    }
+
+    private void HandleGameLockout()
+    {
+        Console.WriteLine("App: LockoutScreen called");
+        isLockoutActive = true; // Activate lockout screen
+        currentState = GameState.LockoutScreen;
+        StateHasChanged();
+    }
+
+    private void ResetLockout()
+    {
+        isLockoutActive = false; // Reset the lockout flag when appropriate
+    }
+
+    [JSInvokable]
+    public void ResetToLoginState()
+    {
+        Console.WriteLine("App: ResetToLoginState called");
+        currentState = GameState.Login;
+        ResetLockout(); // Reset lockout when going back to the login state
+        StateHasChanged();
+    }
+
+    private async Task UpdateNavigationState()
+    {
+        Console.WriteLine("App: UpdateNavigationState called");
+        await JSRuntime.InvokeVoidAsync("resetNavigationToHome");
+    }
+
+    enum GameState
+    {
+        Login,
+        MemberFileBrowsing,
+        GameSegment1,
+        SecureFileBrowsing,
+        GameSegment2,
+        MainFrameFileBrowsing,
+        GameSegment3,
+        ClassifiedFileBrowsing,
+        GameSegment4,
+        GatewayFileBrowsing,
+        GameSegment5,
+        VictoryScreen,
+        LockoutScreen,
+        EliteModeSettings,
+        EliteMode
+    }
+}

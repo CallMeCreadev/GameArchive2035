@@ -1,0 +1,11 @@
+COINTELPRO, short for Counter Intelligence Program, was a series of covert and often illegal activities conducted by the FBI from 1956 to 1971. 
+The program targeted various domestic political organizations that the FBI considered subversive, including civil rights groups, feminist organizations, 
+socialist and communist parties, and other activist movements. COINTELPRO's primary objectives were to surveil, infiltrate, discredit, and disrupt these groups.
+
+COINTELPRO sought to disrupt the activities of targeted groups by sabotaging events, creating internal divisions, and using legal and extralegal means to harass 
+and intimidate activists. The program relied heavily on the collection of information about individuals and organizations, which can be seen as a precursor 
+to modern data collection practices. Today, information systems gather vast amounts of data on individuals, often without their knowledge or consent.
+
+The methods used in COINTELPRO, such as wiretapping, mail interception, and physical surveillance, have modern analogs in digital surveillance 
+tools like email monitoring, social media scraping, and metadata analysis. The program's use of false information, forged documents, and strategic leaks to the media 
+mirrors the ways in which information systems can be used to spread disinformation and influence public opinion today.

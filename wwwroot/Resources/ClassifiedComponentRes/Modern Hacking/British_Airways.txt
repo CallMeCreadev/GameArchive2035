@@ -1,0 +1,10 @@
+In 2018, British Airways suffered a significant data breach that exposed the personal and financial information of approximately 380,000 customers. 
+While the breach was primarily due to a compromise of British Airways' website and mobile app, XSS vulnerabilities played a critical role in the attack.
+The breach was executed by a group known as Magecart, which specializes in injecting malicious scripts into websites to skim credit card information. 
+The attackers exploited XSS vulnerabilities to inject malicious JavaScript into British Airways' website. 
+This script captured payment details entered by users during transactions and sent the data to a server controlled by the attackers.
+The attackers compromised a third-party script (likely an analytics or marketing script) that British Airways had included on its website. 
+This compromised script was then loaded by the website every time a user visited a specific page, such as the payment page.
+Unlike typical breaches where data is stolen from a backend database, this attack skimmed data in real-time as customers were entering it. 
+This made the breach particularly effective and difficult to detect quickly.
+This incident highlighted the risks associated with third-party scripts and the importance of securing the entire web application, including any external resources. 

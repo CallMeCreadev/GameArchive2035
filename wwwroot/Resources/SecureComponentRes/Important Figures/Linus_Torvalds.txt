@@ -1,0 +1,8 @@
+Linus Torvalds started the Linux kernel project in 1991 while he was a student at the University of Helsinki, Finland. 
+He released the first version of the Linux kernel on September 17, 1991, and it has since become the foundation for countless Linux distributions
+
+ In 2005, Linus Torvalds created Git, a distributed version control system, in response to dissatisfaction with the version control tools available at the time, 
+ particularly BitKeeper, which had previously been used for managing the Linux kernel’s source code.
+
+ Torvalds has made it clear that his views on software freedom differ from those of Richard Stallman and the Free Software Foundation (FSF). 
+ While Stallman emphasizes the ethical and moral aspects of software freedom, Torvalds focuses more on the technical and practical advantages of open source

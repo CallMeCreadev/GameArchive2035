@@ -1,0 +1,260 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevents any overflow issues */
+    z-index: 0;
+  }
+  
+  body::before {
+    content: ''; /* Required for the pseudo-element to render */
+    position: absolute; /* Position it relative to the body */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+    background-image: url('../images/secureai.png'); /* Path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5); /* Darkens the image */
+    filter: blur(5px); /* Blurs the background image */
+    z-index: 0;
+  }
+
+
+/* Main container for file browser */
+.file-browser-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    z-index: 1;
+}
+
+
+/* Terminal container */
+.terminal-container {
+    width: 80%;
+    height: 80%;
+    background-color: #0a3100;
+    color: white;
+    font-family: monospace;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 10; /* Ensure it overlays correctly */
+}
+
+/* Styling for terminal input and output */
+.terminal {
+    background-color: black; /* Terminal's internal background */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Close button styling */
+.close-button-terminal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.close-button-terminal:hover {
+    background-color: #c9302c;
+}
+
+/* Command line button in bottom left */
+.open-terminal-button {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    background-color: #2743c0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.open-terminal-button:hover {
+    background-color: #314433;
+}
+/* Other existing styles remain the same */
+.file-browser {
+    border: 1px solid #172e17;
+    padding: 20px;
+    width: 320px;
+    background-color: rgba(170, 236, 170, 0.9);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.file-browser-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1;
+}
+
+.file-item {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.file-item i {
+    margin-right: 10px;
+}
+
+.file-item.folder {
+    color: #007bff;
+}
+
+.file-item.file {
+    color: #333;
+}
+
+.file-item:hover {
+    background-color: rgba(170, 236, 170, 0.9);
+}
+
+.file-viewer {
+    background-color: #1a1919;
+    border: 1px solid #0a3100;
+    padding: 20px;
+    max-width: 80%;
+    width: 80%;
+    margin: 20px auto 0 auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    position: relative;
+    z-index: 20;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.close-button:hover {
+    background-color: #c9302c;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 16px;
+    margin: 0;
+    color: #ffffff;
+}
+
+#output {
+    flex-grow: 1;
+}
+
+#command-input {
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+    font-family: monospace;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal horizontally and vertically */
+    width: 25%;
+    height: 25%;
+    background-color: rgba(0, 0, 0, 0.7); /* Adjusted for better visibility */
+    border: 5px solid #0a3100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.modal-content {
+    background-color: #000000; /* Set background color for modal content */
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure footer is at the bottom */
+}
+
+.modal-body {
+    flex: 1; /* Take up remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 20px; /* Space above the footer */
+}
+
+.modal-button {
+    flex: 1; /* Make buttons equal-sized */
+    margin: 0 5px; /* Space between buttons */
+    padding: 10px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Button color */
+    color: white;
+    cursor: pointer;
+    font-size: 16px; /* Font size */
+}
+
+.modal-button:hover {
+    background-color: #0056b3; /* Hover color */
+}
+
+.modal-button:focus {
+    outline: none; /* Remove focus outline if needed */
+}

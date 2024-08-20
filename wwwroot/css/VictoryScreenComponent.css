@@ -1,0 +1,93 @@
+/* Center the file browser component on the page */
+.file-browser-container {
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/victory.png'); /* Corrected path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0; /* Ensure no extra spacing */
+}
+
+/* Styling for the file browser itself */
+.file-browser {
+    border: 1px solid #172e17;
+    padding: 20px;
+    width: 320px;
+    background-color: rgba(170, 236, 170, 0.9); /* Slightly transparent background */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+/* Content inside the file browser */
+.file-browser-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.file-item {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.file-item i {
+    margin-right: 10px;
+}
+
+.file-item.folder {
+    color: #007bff;
+}
+
+.file-item.file {
+    color: #333;
+}
+
+.file-item:hover {
+    background-color: rgba(170, 236, 170, 0.9)
+}
+
+/* Styling for the file viewer */
+.file-viewer {
+    background-color: #1a1919;
+    border: 1px solid #0a3100;
+    padding: 20px;
+    max-width: 80%; /* Adjust this to control the width */
+    width: 80%; /* Ensure it takes up 80% of the container width */
+    margin: 20px auto 0 auto; /* Remove top margin and center the file viewer with some bottom margin */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add some shadow for emphasis */
+    border-radius: 8px; /* Match the browser styling */
+    position: relative; /* Position relative for the close button */
+}
+
+/* Close button styling */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners for the button */
+}
+
+.close-button:hover {
+    background-color: #c9302c; /* Darker shade on hover */
+}
+
+pre {
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word;
+    font-size: 16px; /* Adjust font size for better readability */
+    margin: 0; /* Remove margin to avoid extra space */
+    color: #ffffff; /* Ensure text is visible against dark background */
+}

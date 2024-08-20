@@ -1,0 +1,29 @@
+Rack-Mount Servers (30 units)
+        Description: High-performance servers for data processing and storage.
+        Estimated Price: $4,000 per unit
+        Total: $120,000
+Networking Equipment (Routers, Switches)
+        Description: Essential networking hardware for managing data traffic and connectivity.
+        Estimated Price: $15,000
+Uninterruptible Power Supply (UPS) Systems
+        Description: Backup power solutions to ensure continuous operation during outages.
+        Estimated Price: $9,000
+Cooling Systems (HVAC and Fans)
+        Description: Cooling systems to maintain optimal operating temperatures.
+        Estimated Price: $11,000
+Server Racks and Cabinets (15 units)
+        Description: Physical enclosures for organizing and housing servers.
+        Estimated Price: $800 per unit
+        Total: $12,000
+Cabling and Infrastructure
+        Description: Cables, connectors, and other infrastructure components necessary for setup.
+        Estimated Price: $5,000
+Security Systems (Cameras, Alarms)
+        Description: Physical and electronic security measures to protect the server farm.
+        Estimated Price: $6,000
+Lubricant (for Server Fans and Moving Parts)
+        Description: High-quality lubricant for maintaining smooth operation of fans and other moving components.
+        Estimated Price: $400
+Cleaning Supplies (Tissues, Cleaning Wipes)
+        Description: Supplies for regular cleaning of server equipment and work areas.
+        Estimated Price: $500

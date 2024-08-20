@@ -1,0 +1,9 @@
+NotPetya was a devastating cyberattack that initially targeted Ukraine but quickly spread globally, causing billions of dollars in damage. 
+It is widely attributed to the Russian military intelligence agency GRU. 
+The attack was disguised as ransomware, but its true purpose was to cause widespread disruption, 
+particularly targeting Ukraine’s infrastructure during a period of heightened tension between Ukraine and Russia.
+NotPetya spread through a compromised update mechanism for a popular Ukrainian accounting software, M.E.Doc. 
+Once inside a network, it exploited the EternalBlue vulnerability and moved across systems, encrypting the master boot record (MBR), rendering devices inoperable.
+EternalBlue exploited a vulnerability in the SMBv1 (Server Message Block version 1) protocol, allowing remote code execution. 
+It leveraged a buffer overflow in the srv.sys driver, enabling attackers to execute arbitrary code on vulnerable machines.
+The EternalBlue exploit was developed by the NSA and was later leaked by the Shadow Brokers hacking group, making it available to cybercriminals and nation-state actors.

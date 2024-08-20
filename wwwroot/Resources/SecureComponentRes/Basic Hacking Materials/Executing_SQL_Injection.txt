@@ -1,0 +1,15 @@
+In this folder you will find descriptions about the introductory hacking technique known as the SQL injection.
+Most people know how to defend against this basic technique by parameterizing their queries; however, some old sites may still be vulnerbable.
+Here is the gist of how it works.
+
+Say you wrote something like this 
+string query = "SELECT * FROM Users WHERE Username = '" + userInput + "'";
+
+Now what you might think is going to happen is that someone will be entering a username and your query will execute just fine;
+
+Unfortunately it has a critical flaw, what happens if someone decides to pass in ' OR '1'='1?
+You pass that value into the query and suddenly what gets sent to the Database is SELECT * FROM Users WHERE Username = '' OR '1'='1'.
+If you didn't know '1' = '1' might as well mean "Just Do It."
+
+
+

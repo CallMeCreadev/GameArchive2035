@@ -1,0 +1,7 @@
+In 2008, Heartland Payment Systems, a major U.S. payment processor, suffered a massive security breach due to a SQL injection attack. 
+Hackers exploited vulnerabilities in the company's systems, gaining unauthorized access.
+The vulnerability was reportedly found in a web application that interacted with the company's internal databases.
+The application likely used dynamically constructed SQL queries that incorporated user input directly, without proper sanitization.
+The compromised application was querying tables that contained sensitive information, including credit and debit card numbers.
+The Heartland Payment Systems breach was part of a larger series of cyberattacks orchestrated by a group led by Albert Gonzalez, a notorious cybercriminal
+Gonzalez was sentenced to 20 years in federal prison for his role in the Heartland breach and other related cybercrimes.

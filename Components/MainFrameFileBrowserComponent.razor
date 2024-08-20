@@ -1,0 +1,432 @@
+
+<link href="css/MainFrameFileBrowserComponent.css?v=1.3" rel="stylesheet">
+<body>
+    <div class = "mainframe-container"> 
+        <script src="js/SecureFileBrowsing.js"></script>
+        <div class="terminal-container">
+            <div class="terminal">
+                <div id="output">
+                    @foreach (var line in Output)
+                    {
+                        <div>@line</div>
+                    }
+                    <!-- Only display the terminal path in the input area when the user is typing -->
+                    <div style="display: flex; align-items: center;">
+                        <span>@terminalPath></span>
+                        <input 
+                            @bind="CurrentCommand" 
+                            @bind:event="oninput" 
+                            @onkeydown="HandleKeyDown" 
+                            id="command-input" 
+                            type="text"
+                            autocomplete="off" 
+                            style="border: none; background: transparent; color: inherit; outline: none; flex-grow: 1; margin-left: 5px;"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+@code {
+[Parameter] public EventCallback OnTriggerGame { get; set; }
+
+    // Terminal Related Code
+    private string terminalPath = "Users\\sysadmin";
+    private string CurrentCommand { get; set; } = "";
+    private List<string> Output { get; set; } = new List<string>();
+    private bool IsTerminalVisible { get; set; } = false;
+    private bool IsPasswordPromptActive { get; set; } = false;
+
+    //71kentucky
+    private string classifiedFolderPassword = "71kentucky";
+    private string PasswordInput { get; set; } = "";
+
+    // Define predefined files for each directory
+    private Dictionary<string, List<string>> directories = new Dictionary<string, List<string>>
+    {
+        { "Users\\sysadmin", new List<string> { "readme.txt", "Classified", "AdvancedHacking", "Infrastructure", "WorkOrders"  } },
+        { "Users\\sysadmin\\AdvancedHacking", new List<string> { "Morris_Worm.txt", "Aleph_One.txt", "Code_Red_Worm.txt", "Heartbleed.txt", "Executing_Buffer_Overflow.txt", "Defending_Buffer_Overflow.txt"} },
+        { "Users\\sysadmin\\Infrastructure", new List<string> { "Gateway_Access_Design.txt", "Mainframe_Memory_locations.txt" } },
+        { "Users\\sysadmin\\WorkOrders", new List<string> { "TODO_Work_Order_Naming.txt", "TODO_Classified_Chat_Vulnerability.txt", "TODO_Gateway_Critical_Vulnerability.txt", ".StagenetLogs.txt" } },
+        { "Users\\sysadmin\\Classified", new List<string> { "placeholder.txt" } } 
+    };
+
+    private Dictionary<string, string> fileContents = new Dictionary<string, string>
+    {
+        // Define file content for each file
+        { "Users\\sysadmin\\readme.txt", @"
+        You now have permission to edit the names of files in the WorkOrders directory using the mv command.
+        Example: mv TODO_vulnerability.txt  DONE_vulnerability.txt" },
+        
+
+        { "Users\\sysadmin\\AdvancedHacking\\Morris_Worm.txt", @"The Morris Worm exploited the Unix Operating Systems fingerd service in 1988. 
+        The fingerd daemon was supposed to take the user input from a remote client (the username being queried) and process it. 
+        However finger did not properly check the length of the input it received from the remote client. 
+        If the input was longer than the buffer allocated to store it, the extra data would spill over into adjacent memory. By carefully crafting the input, 
+        the Morris Worm was able to overwrite the return address with a location that pointed to malicious code injected by the worm itself. 
+        When the function tried to return, it would instead jump to the worm's code, executing it. This overflow allowed the worm to overwrite the return address 
+        in memory and execute its own code, which included instructions to copy the worm's program onto the system. 
+        Once it infected a system, it would repeat the process, using the same vulnerabilities (fingerd and sendmail) to find and infect more systems." },
+        
+        { "Users\\sysadmin\\AdvancedHacking\\Aleph_One.txt", @"Aleph One's article, 'Smashing the Stack for Fun and Profit,' published in Phrack magazine in 1996, 
+        is a seminal work that demystified buffer overflow attacks. The article provides a detailed, step-by-step guide on how to exploit buffer overflows to gain 
+        unauthorized access to systems. It explains the mechanics of the stack, how input can overwrite the return address, and how attackers can execute arbitrary code. 
+        By making these techniques accessible, the article significantly influenced the security community, leading to widespread exploitation of buffer overflows and 
+        prompting a stronger focus on secure coding practices." },
+
+
+        { "Users\\sysadmin\\AdvancedHacking\\Code_Red_Worm.txt", @"The Code Red Worm, discovered in July 2001, was a self-replicating computer worm that targeted Microsoft's 
+        Internet Information Services (IIS) web server. IIS included an optional component called the Indexing Service, which was used to index and search files on the server. 
+        The vulnerability occurred when IIS received a specially crafted HTTP request. The request involved a long string of repeated data within the 'Host:' 
+        field of an HTTP GET request. The indexing service failed to properly validate the length of the input before copying it into a fixed-size buffer.
+        Once the buffer was overflowed, the injected code could take control of the web server process. 
+        The Code Red Worm used this vulnerability to propagate itself, executing code that used the compromised server to scan for and infect other vulnerable IIS servers.
+        It had a built-in time-triggered attack mechanism: after spreading for 20 days, it would attempt a denial-of-service (DoS) attack against specific targets, 
+        including the White House's web server." },
+
+        
+        { "Users\\sysadmin\\AdvancedHacking\\Heartbleed.txt", @"Heartbleed was a critical security vulnerability discovered in 2014 in the OpenSSL library, 
+        which is widely used to secure communications on the internet. The bug was in the OpenSSL library's implementation of the TLS heartbeat extension. A client could send a 
+        heartbeat request with a payload size much larger than the actual data sent. The server would then respond with the amount of data specified in the request, 
+        including whatever was in the adjacent memory, leading to unintended exposure of sensitive data such as private encryption keys, 
+        usernames and passwords. The heartbeat mechanism was designed so that when a client sends a small piece of data along with a specified payload size, 
+        the server would simply respond by echoing back the data exactly as it was received. 
+        However, the vulnerability arose because the server trusted the payload size specified by the client without verifying it." },
+
+         { "Users\\sysadmin\\AdvancedHacking\\Executing_Buffer_Overflow.txt", @"A buffer is a contiguous block of memory allocated to hold data, such as a string or array.
+         When a program doesn't properly check the length of input data, an attacker can input more data than the buffer can hold, causing the excess data to overwrite 
+         adjacent memory locations. The attacker can then overwrite crucial data, like the return address of a function. By doing this, 
+         they can redirect the program's execution to malicious code they've injected into memory. If a password or other critical data is stored next to the buffer being overflowed, 
+         the overflow can corrupt or replace that data. This might cause the program to malfunction, use incorrect or unintended data, 
+         or even expose the overwritten data to the attacker." },
+        
+        { "Users\\sysadmin\\AdvancedHacking\\Defending_Buffer_Overflow.txt", @"Defending against buffer overflows involves several techniques, 
+            both in coding practices and system-level protections. Always validate input sizes before copying data into buffers.  
+            Ensure that input does not exceed the allocated buffer size.  Compilers have Address Space Layout Randomization (ASLR): 
+            This randomizes the memory address space of processes, making it more difficult for an attacker to predict the location of specific buffers or control data.
+            Languages like Python, Java, Rust and C# have a runtime environment that handles memory management including bounds checking for arrays and strings." },
+
+
+
+
+
+        { "Users\\sysadmin\\Infrastructure\\Gateway_Access_Design.txt", @"
+        We use a system of user inputs that when validated internally will modify the HTML of our Gateway page to display the password so that approved users can enter it and access
+        Project Victory. Our HTML for the password element is <div id='password' style='display:none;'>??????</div> for security reasons 
+        I have redacted the value, once the keys have been accepted our internal javascript code will alter the display from none to block allowing it to be viewed." },
+
+
+        { "Users\\sysadmin\\Infrastructure\\Mainframe_Memory_locations.txt", @"The Memory addresses in Mainframe are stored in the stack. 
+        The Work Order File names memory addresses are as follows: TODO_Gateway_Critical_Vulnerability: 0x55f8e6a25f8a    TODO_Remote_Chat_Vulnerability: 0x55f8e6a25fbc    
+        TODO_Gateway_Critical_Vulnerability: 0x55f8e6a25fee    The Password for the Classified Files is stored in 0x55f8e6a26020.   The Password Memory field is 10 bytes long (10 characters)." },
+
+        
+        { "Users\\sysadmin\\WorkOrders\\TODO_Work_Order_Naming_Vulnerability.txt", @"We have a software vulnerability in our Work Order intake, we currently are using an outdated C
+        method. specifically we are using a char buffer[50] and the function strcpy(buffer, fileName), In order to continue using C We can use the function strncpy which has a 
+        parameter for the buffer size. If we modify the code to strncpy(buffer, fileName, sizeof(buffer) - 1); and add  buffer[sizeof(buffer) - 1] = '\0'; we can ensure that
+        any extra character after 50 will be removed and the 50th character will be replaced with a null terminator when saved in memory." },
+
+        { "Users\\sysadmin\\WorkOrders\\TODO_Classified_Chat_Vulnerability.txt", @"We have a software vulnerability in our Classified Messenger application. 
+        we are currently getting a valid AuthToken with the following query: SELECT MessengerAuthToken from Authorized Where Userkey = '+ UserInput +' 
+        ORDER BY PermissionLevel DESC LIMIT 1. We need to make sure that this query is parameterized using command.Parameters.AddWithValue(). "},
+        
+        { "Users\\sysadmin\\WorkOrders\\TODO_Gateway_Critical_Vulnerability.txt", @"Our most critical file is protected by a system of 3 keys and only when all are correct 
+        does the our ultimate access code display itself. We currently have a system in place to display the entered values from members trying to get access. We have some old javascript code
+        that needs to be updated. We currently use enteredValue = document.getElementById('inputBox').value to get the value from the 3 input boxs followed by document.write('Key Value: ' + enteredValue); 
+        This is vulnerable to a user that injects javascript into the input boxs. We should be using the textContent javascript property. For example var displayElement = document.getElementById('displayBox');
+        can be used to get the display element we want to write to and displayElement.textContent = 'Key Value: ' + enteredValue; can be used to ensure that any value will be
+        processed and displayed as plain text." },
+
+
+        {"Users\\sysadmin\\WorkOrders\\.StagenetLogs.txt", @"[2024-08-05 00:44:35] [+90h18m30.616s] [net.p2p:info|p2p/net_node.inl:1645] Failed to connect to any, trying seeds
+            [2024-08-05 00:44:36] [+90h18m30.703s] [net.p2p:info|p2p/net_node.inl:2427] [104.243.40.38:11022 0ca1dae1-b633-435b-9ffb-10db1cb9c83c OUT] NEW CONNECTION
+            [2024-08-05 00:44:36] [+90h18m30.791s] [net.p2p:info|p2p/net_node.inl:2442] [104.243.40.38:11022 0ca1dae1-b633-435b-9ffb-10db1cb9c83c OUT] CLOSE CONNECTION
+            [2024-08-05 00:44:36] [+90h18m30.875s] [net.p2p:info|p2p/net_node.inl:2427] [104.243.40.38:50022 734ff4d8-bf1d-476e-9cab-654a16f6dcd7 INC] NEW CONNECTION
+            [2024-08-05 00:44:36] [+90h18m31.682s] [net.p2p:info|p2p/net_node.inl:2442] [104.243.40.38:11022 1d9edf44-0ba7-476c-abc3-e06480f6cdd7 OUT] CLOSE CONNECTION
+            [2024-08-05 00:44:37] [+90h18m32.221s] [omq:warning|oxenmq/auth.cpp:51] Access denied to quorum.timestamp for peer 
+            [db55612d12d97880cc69e5da3c99f7a80d04202feadef85a4b11e70bd39ec779]/185.150.191.32: remote is not recognized as a service node"
+        },
+        
+        { "Users\\sysadmin\\Classified\\placeholder.txt", "Nothing Here" }
+    };
+
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+
+    private void ToggleTerminal()
+    {
+        IsTerminalVisible = !IsTerminalVisible;
+
+        if (IsTerminalVisible)
+        {
+            Output.Clear();
+            Output.Add("Archive 2035 [Version 1.01]");
+            StateHasChanged();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+            await JSRuntime.InvokeVoidAsync("focusAndClickInput", "command-input");  
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            if (IsPasswordPromptActive)
+            {
+                PasswordInput = CurrentCommand;
+                await HandlePasswordEntry();
+            }
+            else
+            {
+                Output.Add($"{terminalPath}> {CurrentCommand}");
+                await ProcessCommand(CurrentCommand);
+                CurrentCommand = "";
+            }
+
+            StateHasChanged();
+        }
+    }
+
+    private async Task HandlePasswordEntry()
+    {
+        var trimmedPasswordInput = PasswordInput.Trim();
+        var trimmedClassifiedPassword = classifiedFolderPassword.Trim();
+
+
+        if (trimmedPasswordInput == trimmedClassifiedPassword)
+        {
+            Output.Add("Access granted.");
+            terminalPath = "Users\\sysadmin\\Classified";
+            TriggerGame();
+        }
+        else
+        {
+            Output.Add("Access denied.");
+        }
+
+        IsPasswordPromptActive = false;
+        PasswordInput = "";
+        CurrentCommand = ""; // Clear command after processing
+        await JSRuntime.InvokeVoidAsync("focusAndClickInput", "command-input");
+    }
+
+    private async Task ProcessCommand(string command)
+    {
+        var parts = command.Split(new[] { ' ' }, 2);
+        var cmd = parts[0].ToLower().Trim();
+        var arg = parts.Length > 1 ? parts[1].Trim() : "";
+
+        if (cmd.StartsWith("cd") && cmd.Length > 2 && cmd.Substring(2).Trim() == "..")
+        {
+            // Handle commands like "cd..", "cd ..", "cd    .."
+            ChangeDirectory("..");
+        }
+        else if (cmd == "cd" && (arg == ".." || arg == "." || arg == ""))
+        {
+            ChangeDirectory(arg);
+        }
+        else
+        {
+            switch (cmd)
+            {
+                case "cd":
+                    ChangeDirectory(arg);
+                    break;
+                case "cat":
+                    ViewFile(arg);
+                    break;
+                case "ls":
+                    ListDirectory(arg);
+                    break;
+                case "clear":
+                    ClearScreen();
+                    break;
+                case "mv":
+                    var renameArgs = arg.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (renameArgs.Length == 2)
+                    {
+                        renameFile(renameArgs[0], renameArgs[1]);
+                    }
+                    else
+                    {
+                        Output.Add("Usage: mv <source_filename> <destination_filename>");
+                    }
+                    break;
+                default:
+                    Output.Add("This is an invalid command for user sysadmin.");
+                    break;
+            }
+        }
+    }
+
+
+    private void renameFile(string filename1, string filename2)
+    {
+        if (directories.TryGetValue(terminalPath, out var files))
+        {
+            int index = files.IndexOf(filename1);
+
+            // Check if the source file exists
+            if (index >= 0)
+            {
+                // Check if the destination file already exists
+                if (files.Contains(filename2))
+                {
+                    Output.Add($"Cannot rename {filename1}: {filename2} already exists.");
+                }
+                else
+                {
+                    // Rename the file in the directories dictionary, preserving the index
+                    files[index] = filename2;
+
+                    // Simulate buffer overflow by checking filename lengths and setting the password
+                    if (terminalPath == "Users\\sysadmin\\WorkOrders")
+                    {
+                        if (index == 0 && filename2.Length > 60)
+                        {
+                            classifiedFolderPassword = filename2.Substring(50, Math.Min(10, filename2.Length - 50));
+                            Console.WriteLine(classifiedFolderPassword);
+                        }
+                        else if (index == 1 && filename2.Length > 110)
+                        {
+                            classifiedFolderPassword = filename2.Substring(100, Math.Min(10, filename2.Length - 100));
+                            Console.WriteLine(classifiedFolderPassword);
+                        }
+                        else if (index == 2 && filename2.Length > 160)
+                        {
+                            classifiedFolderPassword = filename2.Substring(150, Math.Min(10, filename2.Length - 150));
+                            Console.WriteLine(classifiedFolderPassword);
+                        }
+                    }
+
+                    // Rename the file in the fileContents dictionary, if it exists there
+                    var filePath1 = $"{terminalPath}\\{filename1}";
+                    var filePath2 = $"{terminalPath}\\{filename2}";
+
+                    if (fileContents.ContainsKey(filePath1))
+                    {
+                        var content = fileContents[filePath1];
+                        fileContents.Remove(filePath1);
+                        fileContents[filePath2] = content;
+                    }
+
+                    Output.Add($"{filename1} has been renamed to {filename2}");
+                }
+            }
+            else
+            {
+                Output.Add($"Cannot rename {filename1}: No such file or directory.");
+            }
+        }
+        else
+        {
+            Output.Add("This is an invalid command in this directory");
+        }
+    }
+
+
+
+    private void ChangeDirectory(string directory)
+    {
+        if (directory == "..")
+        {
+            if (terminalPath == "Users\\sysadmin")
+            {
+                Output.Add("This is an invalid command for user sysadmin.");
+            }
+            else
+            {
+                var lastIndex = terminalPath.LastIndexOf("\\");
+                terminalPath = terminalPath.Substring(0, lastIndex);
+            }
+        }
+        else
+        {
+            var newPath = $"{terminalPath}\\{directory}";
+            newPath = newPath.Replace("\\\\", "\\").Trim();
+
+            if (directories.Keys.Any(path => string.Equals(path, newPath, StringComparison.OrdinalIgnoreCase)))
+            {
+                if (directory.Equals("Classified", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Trigger password prompt for Classified directory
+                    Output.Add("The folder is password protected. Enter password:");
+                    IsPasswordPromptActive = true;
+                    PasswordInput = ""; // Reset the password input field
+                    StateHasChanged();
+                }
+                else
+                {
+                    terminalPath = directories.Keys.First(path => string.Equals(path, newPath, StringComparison.OrdinalIgnoreCase));
+                }
+            }
+            else
+            {
+                Output.Add("The system cannot find the path specified.");
+            }
+        }
+    }
+
+
+
+
+    private void ClearScreen()
+    {
+        // Clear the output but keep the current path prompt
+        Output.Clear();
+        
+    }
+
+    private void TriggerGame()
+    {
+        OnTriggerGame.InvokeAsync();
+    }
+
+   private void ListDirectory(string options = "")
+   {
+        if (directories.TryGetValue(terminalPath, out var files))
+        {
+            bool showAllFiles = options.Contains("-a");
+
+            foreach (var file in files)
+            {
+                // If -a is not passed, skip files that start with a dot
+                if (!showAllFiles && file.StartsWith("."))
+                {
+                    continue;
+                }
+
+                Output.Add(file);
+            }
+
+            // If no files are listed, display a message
+            if (!showAllFiles && files.All(f => f.StartsWith(".")))
+            {
+                Output.Add("No visible files found.");
+            }
+        }
+        else
+        {
+            Output.Add("No files found.");
+        }
+    }
+
+    private void ViewFile(string fileName)
+    {
+        var filePath = $"{terminalPath}\\{fileName}";
+        
+        
+        if (fileContents.TryGetValue(filePath, out var content))
+        {
+            Output.Add(content);
+        }
+        else
+        {
+            Output.Add("File not found.");
+        }
+    }
+
+}  

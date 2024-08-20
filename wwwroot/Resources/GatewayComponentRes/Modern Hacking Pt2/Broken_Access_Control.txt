@@ -1,0 +1,26 @@
+Broken access control occurs when users can access resources or perform actions beyond their intended privileges. 
+This vulnerability arises when applications fail to enforce proper restrictions on what authenticated users can do. 
+For example, a user might be able to view, modify, or delete resources they should not have access to, such as another user's data or administrative functions.
+
+URL Manipulation:
+One common example of broken access control is when sensitive variables are passed in the URL without proper validation. Consider the following URL:
+https://example.com/profile?user_id=123
+In this scenario, the user_id is included directly in the URL. A hacker's first instinct might be to manipulate this URL by changing the user_id to another value, such as:
+https://example.com/profile?user_id=124
+If the application does not properly validate the user's credentials on the server side, the attacker could gain unauthorized access to another user's profile.
+
+HTML and Form Manipulation:
+Another technique involves manipulating the HTML of the webpage itself using developer tools. For example, consider an input field in a form:
+<input type="hidden" name="role" value="user">
+If an attacker identifies this hidden input, they might use developer tools to modify the value from "user" to "admin". 
+If the server does not validate the user's role on the server side, this change could allow the attacker to escalate their privileges and gain administrative access.
+
+Cookie Manipulation:
+A third example of broken access control involves the improper use of cookies to store user roles. 
+Imagine a system where a user's role is stored in a cookie, but the cookie is not signed or encrypted. 
+When a user logs in, their role might be saved in this cookie to remember their access level:
+Set-Cookie: role=user
+However, because users can edit their own cookies, a malicious user could modify this cookie to change their role:
+Set-Cookie: role=admin
+If the server relies solely on the cookie to determine the user's role without validating it, the attacker could gain unauthorized permissions. 
+This is why storing critical information like roles or access levels in unsigned cookies is a security risk.

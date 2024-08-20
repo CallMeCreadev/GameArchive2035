@@ -1,0 +1,18 @@
+Defending against Cross-Site Scripting XSS requies proper input validation and use of web security.
+
+The first step is ensuring that all user inputs are validated according to expected formats and types. 
+Ideally you should Use libraries and frameworks that are designed with with input validation in mind. 
+For example, React, Angular, and Blazor automatically escape user inputs when rendering to the DOM, making it harder to introduce XSS vulnerabilities. 
+
+when not using a library that escapes user inputs you will need to do manual checks. 
+Ensure that all user inputs are validated according to expected formats and types. 
+For example, if a field should only accept numbers, make sure it rejects any input that contains non-numeric characters. 
+Use whitelisting (allowing only certain characters or patterns) rather than blacklisting (blocking certain characters) to make validation more robust.
+Sanitize user inputs to remove or escape characters that could be interpreted as HTML or JavaScript. 
+Convert characters like <, >, &, ', and " to their respective HTML entities (&lt;, &gt;, &amp;, &#39;, and &quot;) to prevent them from being executed as code.
+
+If you are using cookies, make sure to set the HttpOnly attribute. This prevents cookies from being accessed via JavaScript, 
+mitigating the risk of XSS attacks stealing session cookies. Additionally, consider setting the SameSite attribute to further enhance cookie security.
+
+In addition to the steps above you should use automated tools like OWASP ZAP or Burp Suite to scan your web application for XSS vulnerabilities. 
+These tools can help identify potential issues during development and in production, allowing you to address security gaps before they can be exploited.

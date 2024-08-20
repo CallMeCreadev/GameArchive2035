@@ -1,0 +1,496 @@
+@namespace Archive2035.Components
+@using System.IO
+@inject HttpClient _httpClient
+@inject IJSRuntime JSRuntime 
+
+<link href="_content/Blazorise.Icons.FontAwesome/v6/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/ClassifiedFileBrowserComponent.css?v=1.1">
+
+<body>
+    <script src = "js/passwordEnter.js"></script>
+    <div class="file-browser-container">
+        <div class="file-browser">
+            <div class="file-browser-content">
+                @if (!isFileViewerOpen)
+                {
+                    @if (currentPath == "Root")
+                    {
+                        <div class="file-item folder" @onclick='() => OpenFolder("Conspiracy")'>
+                            <i class="fas fa-folder"></i> Conspiracy
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Gateway Portal")'>
+                            <i class="fas fa-folder"></i> Gateway Portal
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Modern Hacking")'>
+                            <i class="fas fa-folder"></i> Modern Hacking
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Military Hacking")'>
+                            <i class="fas fa-folder"></i> Military Hacking
+                        </div>
+                    } <!-- Ensure this brace is properly placed -->
+                    else
+                    {
+                        <div class="file-item folder" @onclick="BackToRoot">
+                            <i class="fas fa-arrow-left"></i> ...
+                        </div>
+                        @if (currentPath == "Conspiracy")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Conspiracy/CIA_and_Crypto_AG.txt")'>
+                                <i class="fas fa-file"></i> CIA and Crypto AG
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Conspiracy/NSA_Morris_Worm.txt")'>
+                                <i class="fas fa-file"></i> NSA Morris Worm
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Conspiracy/NSA_Backdoor.txt")'>
+                                <i class="fas fa-file"></i> NSA Backdoor
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Conspiracy/Microsoft.txt")'>
+                                <i class="fas fa-file"></i> Microsoft
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Conspiracy/PRISM.txt")'>
+                                <i class="fas fa-file"></i> PRISM
+                            </div>
+                        }
+                        else if (currentPath == "Gateway Portal")
+                        {
+  
+                        }
+                        else if (currentPath == "Modern Hacking")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Modern Hacking/Cross_Site_Scripting.txt")'>
+                                <i class="fas fa-file"></i> Cross Site Scripting
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Modern Hacking/MySpace.txt")'>
+                                <i class="fas fa-file"></i> MySpace
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Modern Hacking/British_Airways.txt")'>
+                                <i class="fas fa-file"></i> British Airways
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Modern Hacking/Defending_XSS.txt")'>
+                                <i class="fas fa-file"></i> Defending XSS
+                            </div>
+                           
+                        }
+                        else if (currentPath == "Military Hacking")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Military Hacking/Aurora.txt")'>
+                                <i class="fas fa-file"></i> Aurora
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Military Hacking/Buckshot.txt")'>
+                                <i class="fas fa-file"></i> Buckshot
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Military Hacking/Stuxnet.txt")'>
+                                <i class="fas fa-file"></i> Stuxnet
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Military Hacking/NotPetya.txt")'>
+                                <i class="fas fa-file"></i> NotPetya
+                            </div>
+                        }
+                    } <!-- Close the outer else block properly here -->
+                } <!-- Close the outer if block here -->
+            </div>
+        </div>
+        
+        @if (isFileViewerOpen)
+        {
+            <div class="file-viewer">
+                <button class="close-button" @onclick="CloseFileViewer">X</button>
+                <pre>@fileContent</pre>
+            </div>
+        }
+
+        @if (IsPasswordValidatorVisible)
+        {
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <h3>Password Required</h3>
+                    <div class="modal-body">
+                        <label for="password">Enter Password:</label>
+                        <input type="password" id="password" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
+                        <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
+                        <button class="modal-button" @onclick="CloseModal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        
+                
+            <div class="message-box-container @(IsAccessGranted ? "access-granted" : "")">
+            <div class="message-container">
+                @foreach (var message in Messages)
+                {
+                    <div>@message</div> <!-- Each message should be inside a div -->
+                }
+            </div>
+            @if (!IsAccessGranted)
+            {
+                <div>
+                    <input @bind="AccessCode" placeholder="Enter Access Code" />
+                    <button class="submit-button" @onclick="CheckAccessCode">Submit</button>
+                </div>
+            }
+            <div>
+                <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
+                        @onclick="() => HandleButtonPress(Button1Text)" 
+                        disabled="@(IsAccessGranted ? null : true)">
+                    @Button1Text
+                </button>
+                <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
+                        @onclick="() => HandleButtonPress(Button2Text)" 
+                        disabled="@(IsAccessGranted ? null : true)">
+                    @Button2Text
+                </button>
+                <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
+                        @onclick="() => HandleButtonPress(Button3Text)" 
+                        disabled="@(IsAccessGranted ? null : true)">
+                    @Button3Text
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+@code {
+    private string currentPath = "Root";
+    private string fileContent = string.Empty;
+    private bool isFileViewerOpen = false;
+
+
+    private bool ApprovedUser { get; set; } = false;
+    private string AccessCode { get; set; }
+    private bool IsAccessGranted { get; set; } = false;
+    private List<string> Messages { get; set; } = new List<string>();
+
+    // Button texts
+    private string Button1Text { get; set; } = "Option 1";
+    private string Button2Text { get; set; } = "Option 2";
+    private string Button3Text { get; set; } = "Option 3";
+
+    private bool isSubmitting = false;
+
+    private string password { get; set; }
+    private bool passwordError { get; set; }
+    [Parameter] public bool IsPasswordValidatorVisible { get; set; }
+    private ElementReference modalOverlay;
+
+
+    private void HandleInputChange(ChangeEventArgs e)
+    {
+        password = e.Value?.ToString();
+    }
+
+
+    private void ClearErrorMessage(ChangeEventArgs e)
+    {
+        passwordError = false; // Reset the error flag
+        password = e.Value?.ToString(); // Update the password value (if needed)
+    }
+    private async Task HandleEnterPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Prevent double submission by setting a flag if necessary
+            await ValidatePassword();
+        }
+    }
+
+    private async Task HandleModalClose(bool isPasswordCorrect)
+    {
+        if (isPasswordCorrect)
+        {
+            IsPasswordValidatorVisible = false;
+            await Task.Delay(100);
+            await JSRuntime.InvokeVoidAsync("hideModal");
+            await OpenFolder(currentPath); // Reattempt to open the folder
+        }
+        else
+        {
+            IsPasswordValidatorVisible = true;
+        }
+    }
+
+    private async Task ValidatePassword()
+    {
+        if (password == null)
+        {
+            Console.WriteLine("Password is null");
+            return;
+        }
+
+        password = password.Trim();
+
+        Console.WriteLine("Validating Password");
+        Console.WriteLine($"Entered Password: {password}");
+
+        
+        if (password == "MoonLynHappy") // Replace with actual password
+        {
+            passwordError = false;
+            await HandleModalClose(true);
+            TriggerGame();
+        }
+        else
+        {
+            passwordError = true;
+            await JSRuntime.InvokeVoidAsync("showTemporaryError", "Incorrect password, please try again.");
+        }
+    }
+
+
+    private async Task CloseModal()
+    {
+        IsPasswordValidatorVisible = false;
+        password = string.Empty; // Clear the password field when the modal is closed
+        await Task.Delay(100);
+        await JSRuntime.InvokeVoidAsync("hideModal");
+    }
+
+
+
+
+    private void CheckAccessCode()
+    {
+       if (AccessCode == "your_code_here" || IsSimulatedSqlInjection(AccessCode))
+       {
+           IsAccessGranted = true;
+           Messages.Add("Access granted. Welcome!");
+           LoadInitialMessage(); // Load the first set of options and message
+       }
+       else
+       {
+           Messages.Add("Access denied. Try again.");
+       }
+        
+    }
+
+    private void LoadInitialMessage()
+    {
+        SendMessage("Hello & Welcome Senior Admin! How can I help you today?");
+
+        // Set up options for the user to select
+        Button1Text = "Forgot Gateway Password";
+        Button2Text = "I have a question";
+        Button3Text = "Just saying hello";
+    }
+
+// Method to simulate SQL injection pattern
+    private bool IsSimulatedSqlInjection(string input)
+    {
+        // Normalize input to handle cases with different capitalization
+        input = input.Trim();
+
+        // Remove spaces after 'OR' if present to handle inputs without spaces
+        input = input.Replace(" ", "");
+
+        // Check if the input starts with 'OR (not case-sensitive)
+        if (input.Length >= 5 && input.Substring(0, 4).Equals("'OR'", StringComparison.OrdinalIgnoreCase))
+        {
+            // Extract the part after 'OR' and remove the leading part
+            string remainingPart = input.Substring(4).Trim();
+
+            // Check if remaining part follows the pattern 'value' = 'value
+            var parts = remainingPart.Split(new[] { "'='" }, StringSplitOptions.None);
+
+            if (parts.Length == 2)
+            {
+                // Remove trailing single quote from the first part and trim the second part
+                string leftSide = parts[0].TrimEnd('\'');
+                string rightSide = parts[1].Trim();
+
+                // If the parts match, return true
+                if (leftSide == rightSide)
+                {
+                    return true;
+                }
+            }
+        }
+
+        // If the pattern doesn't match, return false
+        return false;
+    }
+
+
+    private void SendMessage(string message)
+    {
+        Messages.Clear(); // Clear previous messages
+        Messages.Add(message); // Add the new message
+        StateHasChanged(); // Update the UI
+    }
+
+    private void HandleButtonPress(string buttonText)
+    {
+        switch (buttonText)
+        {
+            case "Just saying hello":
+                LoadInitialMessage();
+                break;
+            case "I have a question":
+                LoadQuestionMessage();
+                break;
+            case "Forgot Gateway Password":
+                if(!ApprovedUser)
+                {
+                    LoadPasswordMessage1();
+                    break;
+                }
+                else
+                {
+                    LoadPasswordMessageAnswer();
+                    break;
+                }
+            case "What is this system?":
+                LoadSystemMessage();
+                break;
+            case "What is Gateway Portal?":
+                LoadGatewayMessage();
+                break;
+            case "Bitcoin, Gold, Oil":
+                LoadPasswordMessage2();
+                break;
+            case "175k":
+                LoadPasswordMessage3();
+                break;
+            case "Richard Stallman":
+                LoadPasswordMessageAnswer();
+                break;
+            // Add more cases here for different options
+            default:
+                LoadErrorMessage();
+                break;
+        }
+    }
+
+    private void LoadQuestionMessage()
+    {
+        SendMessage("I am here to assist you, please ask your question.");
+        Button1Text = "What is this system?";
+        Button2Text = "What is Gateway Portal?";
+        Button3Text = "Forgot Gateway Password";
+    }
+
+    private void LoadErrorMessage()
+    {
+        SendMessage("I am sorry, I could not validate that result. In order to protect the account owner I have locked this session.");
+        Button1Text = "Locked";
+        Button2Text = "Locked";
+        Button3Text = "Locked";
+    }
+
+
+    private void LoadGatewayMessage()
+    {
+        SendMessage("The Gateway Portal contains our most secret documents as well as access to the elusive Project Victory files. Only those with the highest clearance gain access. Any other questions?");
+        Button1Text = "What is this system?";
+        Button2Text = "Forgot Gateway Password";
+        Button3Text = "Just saying hello";
+    }
+
+    private void LoadSystemMessage()
+    {
+        SendMessage("This is an automated system designed to assist users based on their access level. I have limited your responses so that interacting is easier for both of us. Any other questions?");
+        Button1Text = "What is Gateway Portal?";
+        Button2Text = "Just saying hello";
+        Button3Text = "Forgot Gateway Password";
+    }
+
+
+    private void LoadPasswordMessage1()
+    {
+        SendMessage("I need to ask you a series of security questions to validate that you are the owner of this account. What are the commodities that we monitor prices of?");
+        Button1Text = "Steel & Semiconductors";
+        Button2Text = "Bitcoin, Gold, Oil";
+        Button3Text = "Copper, Lumber, Wheat";
+    }
+
+    private void LoadPasswordMessage2()
+    {
+        SendMessage("I have another question for you, what is the approximate value of our annual expenses?");
+        Button1Text = "175k";
+        Button2Text = "200K";
+        Button3Text = "150k";
+    }
+
+    private void LoadPasswordMessage3()
+    {
+        SendMessage("I have a final question for you, who founded the Free Software Foundation (FSF)?");
+        Button1Text = "Linus Torvalds";
+        Button2Text = "Markus Persson";
+        Button3Text = "Richard Stallman";
+    }
+
+
+    private void LoadPasswordMessageAnswer()
+    {
+        ApprovedUser = true;
+        SendMessage("Thank you for your patience. I have validated your answers and confirmed you are approved to view the Gateway Portal. The Password is:  MoonLynHappy");
+        Button1Text = "What is this system?";
+        Button2Text = "What is Gateway Portal?";
+        Button3Text = "Just saying hello";
+    }
+
+
+
+
+
+
+
+
+    private async Task OpenFolder(string folderName)
+    {
+        if (folderName == "Gateway Portal" && !IsPasswordValidatorVisible)
+        {
+            IsPasswordValidatorVisible = true;
+            await Task.Delay(100);
+            await JSRuntime.InvokeVoidAsync("showModal");
+            // Ensure JavaScript initializes modal events
+            await JSRuntime.InvokeVoidAsync("initializeModalEvents");
+        }
+        else if (IsPasswordValidatorVisible)
+        {
+            await Task.Delay(0); // Placeholder; adjust as needed
+        }
+        else
+        {
+            currentPath = folderName;
+        }
+    }
+
+    private void BackToRoot()
+    {
+        currentPath = "Root";
+    }
+
+    private async Task OpenFile(string filePath)
+    {
+    // Directly use filePath since it's already the full path relative to the web root
+        var response = await _httpClient.GetStringAsync(filePath);
+
+        if (!string.IsNullOrEmpty(response))
+        {
+            fileContent = response; // Assuming fileContent is a string field in your component to hold the file content
+            isFileViewerOpen = true;
+            StateHasChanged(); // Notify Blazor to re-render the component
+        }
+        else
+        {
+            // Handle the case where the file could not be read, perhaps log an error or update UI accordingly
+        }
+    }
+    private void CloseFileViewer()
+    {
+        isFileViewerOpen = false;
+        fileContent = string.Empty;
+        StateHasChanged();
+    }
+
+    private void TriggerGame()
+    {
+        OnTriggerGame.InvokeAsync();
+    }
+
+    [Parameter] public EventCallback OnTriggerGame { get; set; }
+}

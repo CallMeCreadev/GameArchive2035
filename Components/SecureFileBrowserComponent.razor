@@ -1,0 +1,458 @@
+@namespace Archive2035.Components
+@using System.IO
+@inject HttpClient _httpClient 
+@using Microsoft.Extensions.Logging
+@inject ILogger<SecureFileBrowserComponent> Logger
+
+<link href="_content/Blazorise.Icons.FontAwesome/v6/css/all.min.css" rel="stylesheet">
+<link href="css/SecureFileBrowsing.css?v=1.2" rel="stylesheet">
+
+<body>
+    <div class="file-browser-container">
+        <script src="js/SecureFileBrowsing.js"></script>
+        <script src = "js/passwordEnter.js"></script>
+        <div class="file-browser">
+            <div class="file-browser-content">
+                @if (!isFileViewerOpen)
+                {
+                    @if (currentPath == "Root")
+                    {
+                        <div class="file-item folder" @onclick='() => OpenFolder("Essential Reading")'>
+                            <i class="fas fa-folder"></i> Essential Reading
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Important Figures")'>
+                            <i class="fas fa-folder"></i> Important Figures
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Basic Hacking Materials")'>
+                            <i class="fas fa-folder"></i> Basic Hacking Materials
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Mainframe")'>
+                            <i class="fas fa-folder"></i> Mainframe
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="file-item folder" @onclick="BackToRoot">
+                            <i class="fas fa-arrow-left"></i> ...
+                        </div>
+                        @if (currentPath == "Essential Reading")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Essential Reading/Linux_Commands.txt")'>
+                                <i class="fas fa-file"></i> Terminal Commands
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Essential Reading/Command_Restrictions.txt")'>
+                                <i class="fas fa-file"></i> Command Restrictions
+                            </div>
+                        }
+                        else if (currentPath == "Important Figures")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Important Figures/Linus_Torvalds.txt")'>
+                                <i class="fas fa-file"></i> Linus Torvalds
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Important Figures/Richard_Stallman.txt")'>
+                                <i class="fas fa-file"></i> Richard Stallman
+                            </div>
+                        }
+                        else if (currentPath == "Basic Hacking Materials")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Basic Hacking Materials/Executing_SQL_Injection.txt")'>
+                                <i class="fas fa-file"></i> Executing SQL Injection
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Basic Hacking Materials/Defending_Against_Injection.txt")'>
+                                <i class="fas fa-file"></i> Defending Against Injection
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Basic Hacking Materials/Heartland_Payment_Systems.txt")'>
+                                <i class="fas fa-file"></i> Heartland Payment Systems
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Basic Hacking Materials/TalkTalk.txt")'>
+                                <i class="fas fa-file"></i> TalkTalk
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Basic Hacking Materials/Sony_Pictures.txt")'>
+                                <i class="fas fa-file"></i> Sony Pictures
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/SecureComponentRes/Basic Hacking Materials/LinkedIn.txt")'>
+                                <i class="fas fa-file"></i> LinkedIn
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+        @if (isFileViewerOpen)
+        {
+            <div class="file-viewer">
+                <button class="close-button" @onclick="CloseFileViewer">X</button>
+                <pre>@fileContent</pre>
+            </div>
+        }
+        @if (IsPasswordValidatorVisible)
+        {
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <h3>Password Required</h3>
+                    <div class="modal-body">
+                        <label for="password">Enter Password:</label>
+                        <input type="password" id="password" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
+                        <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
+                        <button class="modal-button" @onclick="CloseModal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (IsTerminalVisible)
+        {
+        <div class="terminal-container">
+            <button class="close-button-terminal" @onclick="ToggleTerminal">X</button>
+            <div class="terminal">
+                <div id="output">
+                    @foreach (var line in Output)
+                    {
+                        <div>@line</div>
+                    }
+                    <!-- Only display the terminal path in the input area when the user is typing -->
+                    <div style="display: flex; align-items: center;">
+                        <span>@terminalPath></span>
+                        <input 
+                            @bind="CurrentCommand" 
+                            @bind:event="oninput" 
+                            @onkeydown="HandleKeyDown" 
+                            id="command-input" 
+                            type="text"
+                            autocomplete="off" 
+                            style="border: none; background: transparent; color: inherit; outline: none; flex-grow: 1; margin-left: 5px;"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    <!-- Toggle Command Line Button -->
+    <button class="open-terminal-button" @onclick="ToggleTerminal" style="display: @(IsTerminalVisible ? "none" : "block")">Terminal</button>
+
+    </div>
+</body>
+@code {
+
+    // File Browser Related Code
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+    private string currentPath = "Root"; // For file browser
+    private string fileContent = string.Empty;
+    private bool isFileViewerOpen = false;
+
+    private bool isSubmitting = false;
+
+    private string password { get; set; }
+    private bool passwordError { get; set; }
+    [Parameter] public bool IsPasswordValidatorVisible { get; set; }
+    private ElementReference modalOverlay;
+
+
+    private void HandleInputChange(ChangeEventArgs e)
+    {
+        password = e.Value?.ToString();
+    }
+
+
+    private void ClearErrorMessage(ChangeEventArgs e)
+    {
+        passwordError = false; // Reset the error flag
+        password = e.Value?.ToString(); // Update the password value (if needed)
+    }
+    private async Task HandleEnterPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Prevent double submission by setting a flag if necessary
+            await ValidatePassword();
+        }
+    }
+
+    private async Task OpenFolder(string folderName)
+    {
+        if (folderName == "Mainframe" && !IsPasswordValidatorVisible)
+        {
+            IsPasswordValidatorVisible = true;
+            await Task.Delay(100);
+            await JSRuntime.InvokeVoidAsync("showModal");
+            // Ensure JavaScript initializes modal events
+            await JSRuntime.InvokeVoidAsync("initializeModalEvents");
+        }
+        else if (IsPasswordValidatorVisible)
+        {
+            await Task.Delay(0); // Placeholder; adjust as needed
+        }
+        else
+        {
+            currentPath = folderName;
+        }
+    }
+
+    private async Task HandleModalClose(bool isPasswordCorrect)
+    {
+        if (isPasswordCorrect)
+        {
+            IsPasswordValidatorVisible = false;
+            await Task.Delay(100);
+            await JSRuntime.InvokeVoidAsync("hideModal");
+            await OpenFolder(currentPath); // Reattempt to open the folder
+        }
+        else
+        {
+            IsPasswordValidatorVisible = true;
+        }
+    }
+
+    private async Task ValidatePassword()
+    {
+        if (password == null)
+        {
+            Console.WriteLine("Password is null");
+            return;
+        }
+
+        password = password.Trim();
+
+        Console.WriteLine("Validating Password");
+        Console.WriteLine($"Entered Password: {password}");
+
+        //Tiberium99
+        if (password == "Tiberium99") // Replace with actual password
+        {
+            passwordError = false;
+            await HandleModalClose(true);
+            TriggerGame();
+        }
+        else
+        {
+            passwordError = true;
+            await JSRuntime.InvokeVoidAsync("showTemporaryError", "Incorrect password, please try again.");
+        }
+    }
+
+
+    private async Task CloseModal()
+    {
+        IsPasswordValidatorVisible = false;
+        password = string.Empty; // Clear the password field when the modal is closed
+        await Task.Delay(100);
+        await JSRuntime.InvokeVoidAsync("hideModal");
+    }
+    private void BackToRoot()
+    {
+        currentPath = "Root";
+    }
+
+    private async Task OpenFile(string filePath)
+    {
+        var response = await _httpClient.GetStringAsync(filePath);
+
+        if (!string.IsNullOrEmpty(response))
+        {
+            fileContent = response; 
+            isFileViewerOpen = true;
+            StateHasChanged();
+        }
+        else
+        {
+            // Handle file read error
+        }
+    }
+
+    private void CloseFileViewer()
+    {
+        isFileViewerOpen = false;
+        fileContent = string.Empty;
+        StateHasChanged();
+    }
+
+    private void TriggerGame()
+    {
+        OnTriggerGame.InvokeAsync();
+    }
+
+    [Parameter] public EventCallback OnTriggerGame { get; set; }
+
+    // Terminal Related Code
+    private string terminalPath = "Users\\sysadmin\\logs";
+    private string CurrentCommand { get; set; } = "";
+    private List<string> Output { get; set; } = new List<string>();
+    private bool IsTerminalVisible { get; set; } = false;
+
+    // Define predefined files for each directory
+    private readonly Dictionary<string, List<string>> directories = new Dictionary<string, List<string>>
+    {
+        { "Users\\sysadmin", new List<string> { "logs", "readme.txt", ".password.txt" } },
+        { "Users\\sysadmin\\logs", new List<string> { "Bitcoin.txt", "Oil.txt", "Gold.txt" } }
+    };
+
+    // Define file content for each file
+    private readonly Dictionary<string, string> fileContents = new Dictionary<string, string>
+    {
+        { "Users\\sysadmin\\readme.txt", "This is the sysadmin readme file.\n Please do not save important files in this directory" },
+        {"Users\\sysadmin\\.password.txt", "Mainframe password: Tiberium99" },
+        { "Users\\sysadmin\\logs\\Bitcoin.txt", "Mar 13th 2020: 5165.25 \n Nov 12th 2021: 64400.00 \n Apr 5th 2024: 68919.80" },
+        { "Users\\sysadmin\\logs\\Oil.txt", "Mar 15th 2020: 23.40 \n Nov 14th 2021: 75.64 \n Apr 7th 2024: 85.40" },
+        { "Users\\sysadmin\\logs\\Gold.txt", "Mar 15th 2020: 1499.25 \n Nov 14th 2021: 1845.89 \n Apr 7th 2024: 2344.80" }
+    };
+
+    
+
+    private void ToggleTerminal()
+    {
+        IsTerminalVisible = !IsTerminalVisible;
+
+        if (IsTerminalVisible)
+        {
+            Output.Clear();
+            Output.Add("Archive 2035 [Version 1.01]");
+            StateHasChanged();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (IsTerminalVisible)
+        {
+            await JSRuntime.InvokeVoidAsync("focusAndClickInput", "command-input");
+        }
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Step 1: Concatenate the path and command, and add to the output list
+            Output.Add($"{terminalPath}> {CurrentCommand}");
+
+            // Step 2: Process the command and add the result to the output
+            await ProcessCommand(CurrentCommand);
+
+            // Step 3: Clear the command input after processing
+            CurrentCommand = "";
+
+            // Force the UI to refresh and focus on the input field
+            StateHasChanged();
+        }
+    }
+
+    private async Task ProcessCommand(string command)
+    {
+        var parts = command.Split(new[] { ' ' }, 2);
+        var cmd = parts[0].ToLower().Trim();
+        var arg = parts.Length > 1 ? parts[1].Trim() : "";
+
+        if (cmd.StartsWith("cd") && cmd.Length > 2 && cmd.Substring(2).Trim() == "..")
+        {
+            // Handle commands like "cd..", "cd ..", "cd    .."
+            ChangeDirectory("..");
+        }
+        else if (cmd == "cd" && (arg == ".." || arg == "." || arg == ""))
+        {
+            ChangeDirectory(arg);
+        }
+        else
+        {
+            switch (cmd)
+            {
+                case "cd":
+                    ChangeDirectory(arg);
+                    break;
+                case "cat":
+                    ViewFile(arg);
+                    break;
+                case "ls":
+                    ListDirectory(arg);
+                    break;
+                case "clear":
+                    ClearScreen();
+                    break;
+                default:
+                    Output.Add("This is an invalid command for user sysadmin.");
+                    break;
+            }
+        }
+    }
+
+      private void ChangeDirectory(string directory)
+    {
+        if (directory == "..")
+        {
+            if (terminalPath == "Users\\sysadmin")
+            {
+                Output.Add("This is an invalid command for user sysadmin.");
+            }
+            else
+            {
+                var lastIndex = terminalPath.LastIndexOf("\\");
+                terminalPath = terminalPath.Substring(0, lastIndex);
+            }
+        }
+        else
+        {
+            var newPath = $"{terminalPath}\\{directory}";
+            if (directories.ContainsKey(newPath))
+            {
+                terminalPath = newPath;
+            }
+            else
+            {
+                Output.Add("The system cannot find the path specified.");
+            }
+        }
+    }
+
+    private void ClearScreen()
+    {
+        // Clear the output but keep the current path prompt
+        Output.Clear();
+        
+    }
+
+   private void ListDirectory(string options = "")
+   {
+        if (directories.TryGetValue(terminalPath, out var files))
+        {
+            bool showAllFiles = options.Contains("-a");
+
+            foreach (var file in files)
+            {
+                // If -a is not passed, skip files that start with a dot
+                if (!showAllFiles && file.StartsWith("."))
+                {
+                    continue;
+                }
+
+                Output.Add(file);
+            }
+
+            // If no files are listed, display a message
+            if (!showAllFiles && files.All(f => f.StartsWith(".")))
+            {
+                Output.Add("No visible files found.");
+            }
+        }
+        else
+        {
+            Output.Add("No files found.");
+        }
+    }
+
+    private void ViewFile(string fileName)
+    {
+        var filePath = $"{terminalPath}\\{fileName}";
+        if (fileContents.TryGetValue(filePath, out var content))
+        {
+            Output.Add(content);
+        }
+        else
+        {
+            Output.Add("File not found.");
+        }
+    }
+
+}  

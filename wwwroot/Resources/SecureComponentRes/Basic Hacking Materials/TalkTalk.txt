@@ -1,0 +1,9 @@
+TalkTalk, a UK-based telecommunications company, suffered a major data breach in October 2015. 
+The attack exposed the personal data of millions of customers, causing significant financial and reputational damage to the company
+
+The specific SQL injection vulnerability was found in an outdated web application that TalkTalk had not properly secured. 
+The application was part of the company's infrastructure and had not been updated or patched, leaving it open to exploitation.
+
+The attackers were able to access a wide range of customer data, including:
+Names, Addresses, Dates of birth, Email addresses, Telephone numbers
+Partial credit card and bank details (in some cases, the final six digits of the account numbers were exposed)

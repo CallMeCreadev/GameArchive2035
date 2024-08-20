@@ -1,0 +1,9 @@
+In September 2018, Facebook revealed a major security breach that affected approximately 50 million user accounts. 
+The breach was caused by a broken access control vulnerability that allowed attackers to gain unauthorized access to user accounts without their passwords
+The vulnerability was linked to Facebook's "View As" feature, which allows users to see what their profile looks like to someone else. 
+This feature inadvertently generated an access token that was incorrectly issued with the permissions of the person being "viewed."
+When using the "View As" feature, Facebook would generate an access token for the profile being viewed. 
+An access token in Facebook's system acts as a key that allows users to remain logged in without entering their password repeatedly. 
+Once the attacker obtained the access token for another user, they could log in as that user, bypassing any need for passwords or two-factor authentication.
+The attackers could access any account they targeted using the "View As" feature. They could view personal data, post on the user's behalf, 
+and access connected applications and services.

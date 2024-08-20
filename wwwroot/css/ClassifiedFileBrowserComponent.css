@@ -1,0 +1,257 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevents any overflow issues */
+  }
+  
+  body::before {
+    content: ''; /* Required for the pseudo-element to render */
+    position: absolute; /* Position it relative to the body */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+    background-image: url('../images/Classifiedai2.png'); /* Path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5); /* Darkens the image */
+    filter: blur(5px); /* Blurs the background image */
+  }
+
+
+/* Center the file browser component on the page */
+.file-browser-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+/* Styling for the file browser itself */
+.file-browser {
+    border: 1px solid #172e17;
+    padding: 20px;
+    width: 320px;
+    background-color: rgba(170, 236, 170, 0.9); /* Slightly transparent background */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+/* Content inside the file browser */
+.file-browser-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1;
+}
+
+.file-item {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.file-item i {
+    margin-right: 10px;
+}
+
+.file-item.folder {
+    color: #007bff;
+}
+
+.file-item.file {
+    color: #333;
+}
+
+.file-item:hover {
+    background-color: rgba(170, 236, 170, 0.9)
+}
+
+/* Styling for the file viewer */
+.file-viewer {
+    background-color: #1a1919;
+    border: 1px solid #0a3100;
+    padding: 20px;
+    max-width: 80%; /* Adjust this to control the width */
+    width: 80%; /* Ensure it takes up 80% of the container width */
+    margin: 20px auto 0 auto; /* Remove top margin and center the file viewer with some bottom margin */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add some shadow for emphasis */
+    border-radius: 8px; /* Match the browser styling */
+    position: fixed; /* Position relative for the close button */
+    z-index: 5;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+
+/* Close button styling */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px; /* Rounded corners for the button */
+    z-index: 1;
+}
+
+.close-button:hover {
+    background-color: #c9302c; /* Darker shade on hover */
+    z-index: 1;
+}
+
+pre {
+    white-space: pre-wrap; /* Wrap long lines */
+    word-wrap: break-word;
+    font-size: 16px; /* Adjust font size for better readability */
+    margin: 0; /* Remove margin to avoid extra space */
+    color: #ffffff; /* Ensure text is visible against dark background */
+}
+
+
+
+.modal-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal horizontally and vertically */
+    width: 25%;
+    height: 25%;
+    background-color: rgba(0, 0, 0, 0.7); /* Adjusted for better visibility */
+    border: 5px solid #0a3100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.modal-content {
+    background-color: #000000; /* Set background color for modal content */
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure footer is at the bottom */
+}
+
+.modal-body {
+    flex: 1; /* Take up remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 20px; /* Space above the footer */
+}
+
+.modal-button {
+    flex: 1; /* Make buttons equal-sized */
+    margin: 0 5px; /* Space between buttons */
+    padding: 10px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Button color */
+    color: white;
+    cursor: pointer;
+    font-size: 16px; /* Font size */
+}
+
+.modal-button:hover {
+    background-color: #0056b3; /* Hover color */
+}
+
+.modal-button:focus {
+    outline: none; /* Remove focus outline if needed */
+}
+
+
+
+
+.message-box-container {
+    margin-top: 5%;
+    background-color: rgb(39, 37, 37);
+    border: 3px solid #172e17;
+    color: black;
+    padding: 20px;
+    z-index: 1;
+    left: 30%;
+    top: 10%;
+    z-index: 2;
+    width: 50%; /* Set a fixed width */
+    max-width: 500px; /* Optional: set a max-width */
+}
+
+.message-box-container.access-granted {
+    background-color: lightgrey;
+}
+
+/* Message container styling */
+.message-container {
+    border: 1px solid black;
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto; /* Ensure content scrolls vertically */
+    background-color: white;
+    z-index: 1;
+    word-wrap: break-word; /* Ensure long words wrap to the next line */
+    white-space: normal; /* Allow text to wrap onto the next line */
+    width: 100%; /* Ensure the container stays within the set width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Button styling */
+.message-box-button {
+    margin-top: 20px;
+    background-color: grey;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: not-allowed;
+    z-index: 1;
+}
+
+.message-box-button.enabled {
+    background-color: rgb(53, 99, 44);
+    cursor: pointer;
+}
+
+.message-box-button.enabled:hover {
+    background-color: #68c452;
+    cursor: pointer;
+}
+
+.submit-button {
+    background-color: #579248;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #68c452;
+}
+
+/* Ensure the text wraps properly */
+.message-container div {
+    word-wrap: break-word;
+    white-space: normal;
+}

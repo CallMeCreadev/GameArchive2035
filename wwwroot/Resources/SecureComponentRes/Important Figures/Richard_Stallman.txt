@@ -1,0 +1,9 @@
+Richard Stallman created the GNU Project in 1983, which provided the necessary tools and libraries that, 
+when combined with the Linux kernel, created a fully functional operating system. 
+The combination of GNU software and the Linux kernel is often referred to as GNU/Linux
+
+Richard Stallman is also the original author of GNU Emacs, a highly extensible and customizable text editor. 
+Emacs is one of the earliest and most influential pieces of software produced by the GNU Project
+
+In 1985, Stallman founded the Free Software Foundation (FSF) to support the GNU Project and advocate for software freedom. 
+The FSF promotes the use of free software licenses, most notably the GNU General Public License (GPL), which Stallman wrote to ensure that software remains free and open

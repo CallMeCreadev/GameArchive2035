@@ -1,0 +1,11 @@
+Vault 7 is the name given to a series of documents released by WikiLeaks in March 2017. 
+Allegedly leaked from the CIA's Center for Cyber Intelligence, these documents detailed the agency's cyber-espionage capabilities and hacking tools. 
+The files covered a wide range of techniques used by the CIA to hack into various devices, including smartphones, computers, smart TVs, and even vehicle control systems.
+
+The documents revealed that the CIA had developed or acquired a vast array of tools to exploit vulnerabilities in popular software and hardware. 
+This included methods for bypassing antivirus programs, breaking encryption, and gaining remote access to devices. 
+Notably, Vault 7 showed that the CIA targeted not just traditional computers but also mobile devices, IoT (Internet of Things) devices, and smart home systems.
+
+A key aspect of the Vault 7 documents was the use of "zero-day" exploits—previously unknown vulnerabilities in software.
+These can be exploited before the software vendor has a chance to patch them. 
+These exploits were kept secret by the CIA, rather than being disclosed to the companies that could fix them.

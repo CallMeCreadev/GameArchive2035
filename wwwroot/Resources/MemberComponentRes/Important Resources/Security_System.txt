@@ -1,0 +1,17 @@
+
+To pass the security measures and unlock the restricted files, users are required to input a precise sequence of the W, A, S, and D keys. The correct sequence is obscured within a hidden path that guides the user through the correct order. This path is concealed and accessible only by precise mouse clicks on hidden elements.
+
+
+
+Activation of the Hidden Path
+    	    users can interact with key elements using left click on the mouse, for each successful click a portion of the path will reveal itself.
+            This path will visually indicate the required sequence of W, A, S, and D keystrokes.
+
+Executing the Sequence
+		Once the path is fully revealed key elements will stop appearing.
+		The user should then be able to input the correct W, A, S, D sequence to gain access to the next layer of the system.
+
+Time Limit
+    	    The system operates under a strict time constraint. 
+            Users must enter the W, A, S, D keystrokes in the correct order and within the designated timeframe to avoid automatic lockout.
+		Any incorrect keystroke will reset the path and the user must start the input sequence from beginning.

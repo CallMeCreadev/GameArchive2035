@@ -1,0 +1,13 @@
+In 2011, Sony Pictures was targeted by a group of hackers known as "LulzSec," who used SQL injection to gain 
+unauthorized access to the company's databases. The attackers obtained and released personal information, 
+including usernames, passwords, and email addresses of millions of users.
+
+One of the most criticized aspects of the hack was that Sony Pictures stored user data, including passwords, 
+in plaintext or with weak encryption. This meant that once the data was accessed, it was easily readable and exploitable by the attackers
+
+The breach exposed the personal details of over 1 million users. Sony faced severe criticism for inadequate security measures, 
+and the incident was part of a series of high-profile attacks on Sony's network that year.
+
+While The specific details about which part of Sony's website contained the SQL injection vulnerability exploited by LulzSec 
+were not publicly disclosed by Sony or security researchers. it's likely that the exploited vulnerability was in a web application 
+or form where user input was not properly sanitized.

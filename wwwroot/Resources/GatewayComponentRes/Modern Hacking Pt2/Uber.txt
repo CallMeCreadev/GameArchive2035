@@ -1,0 +1,9 @@
+In 2017, it was revealed that Uber had experienced a significant data breach in 2016 that exposed the personal information of 57 million users and drivers. 
+This breach was partially due to broken access control vulnerabilities within Uber's systems. 
+Uber engineers stored sensitive access credentials, including API keys, on a private GitHub repository. 
+These credentials were used to access Uber's cloud services, including a data store containing sensitive user information.
+Attackers gained access to Uber's GitHub repository, where they discovered the API keys. 
+Using these keys, they were able to bypass access controls and gain direct access to Uber's cloud-based data storage.
+The attackers accessed a database that contained personal information for millions of users and drivers, 
+including names, email addresses, phone numbers, and driver’s license numbers for drivers.
+Instead of disclosing the breach immediately, Uber paid the attackers $100,000 to delete the stolen data and keep the breach confidential.

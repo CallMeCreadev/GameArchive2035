@@ -1,0 +1,385 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\obj\\Debug\\net8.0\\compressed\\ks4mjr2wae.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Archive2035.styles.css",
+      "PackagePath": "staticwebassets\\Archive2035.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Conspiracy\\CIA_and_Crypto_AG.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Conspiracy\\CIA_and_Crypto_AG.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Conspiracy\\Microsoft.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Conspiracy\\Microsoft.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Conspiracy\\NSA_Backdoor.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Conspiracy\\NSA_Backdoor.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Conspiracy\\NSA_Morris_Worm.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Conspiracy\\NSA_Morris_Worm.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Conspiracy\\PRISM.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Conspiracy\\PRISM.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Military Hacking\\Aurora.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Military Hacking\\Aurora.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Military Hacking\\Buckshot.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Military Hacking\\Buckshot.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Military Hacking\\NotPetya.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Military Hacking\\NotPetya.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Military Hacking\\Stuxnet.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Military Hacking\\Stuxnet.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Modern Hacking\\British_Airways.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Modern Hacking\\British_Airways.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Modern Hacking\\Cross_Site_Scripting.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Modern Hacking\\Cross_Site_Scripting.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Modern Hacking\\Defending_XSS.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Modern Hacking\\Defending_XSS.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\ClassifiedComponentRes\\Modern Hacking\\MySpace.txt",
+      "PackagePath": "staticwebassets\\Resources\\ClassifiedComponentRes\\Modern Hacking\\MySpace.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\CIA Documents\\COINTELPRO.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\CIA Documents\\COINTELPRO.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\CIA Documents\\MKUltra.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\CIA Documents\\MKUltra.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\CIA Documents\\SHAMROCK.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\CIA Documents\\SHAMROCK.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\CIA Documents\\Vault7.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\CIA Documents\\Vault7.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Broken_Access_Control.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Broken_Access_Control.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Defending_BAC.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Defending_BAC.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Facebook.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Facebook.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Uber.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Modern Hacking Pt2\\Uber.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\B.F_Skinner.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\B.F_Skinner.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Joseph_Weizenbaum.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Joseph_Weizenbaum.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Marshall_McLuhan.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Marshall_McLuhan.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Norbert_Wiener.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Norbert_Wiener.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Ted_Nelson.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Ted_Nelson.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Vannevar_Bush.txt",
+      "PackagePath": "staticwebassets\\Resources\\GatewayComponentRes\\Synchronicity & Synapse\\Vannevar_Bush.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\MemberComponentRes\\Important Resources\\Security_System.txt",
+      "PackagePath": "staticwebassets\\Resources\\MemberComponentRes\\Important Resources\\Security_System.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\MemberComponentRes\\Important Resources\\System_Administrator_Privileges.txt",
+      "PackagePath": "staticwebassets\\Resources\\MemberComponentRes\\Important Resources\\System_Administrator_Privileges.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\MemberComponentRes\\Membership Documents\\Billing.txt",
+      "PackagePath": "staticwebassets\\Resources\\MemberComponentRes\\Membership Documents\\Billing.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Defending_Against_Injection.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Defending_Against_Injection.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Executing_SQL_Injection.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Executing_SQL_Injection.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Heartland_Payment_Systems.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Heartland_Payment_Systems.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Basic Hacking Materials\\LinkedIn.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Basic Hacking Materials\\LinkedIn.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Sony_Pictures.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Basic Hacking Materials\\Sony_Pictures.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Basic Hacking Materials\\TalkTalk.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Basic Hacking Materials\\TalkTalk.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Essential Reading\\Command_Restrictions.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Essential Reading\\Command_Restrictions.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Essential Reading\\Linux_Commands.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Essential Reading\\Linux_Commands.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Important Figures\\Linus_Torvalds.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Important Figures\\Linus_Torvalds.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\SecureComponentRes\\Important Figures\\Richard_Stallman.txt",
+      "PackagePath": "staticwebassets\\Resources\\SecureComponentRes\\Important Figures\\Richard_Stallman.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\VictoryComponentRes\\Champion Documents\\Elite Mode Brutal.txt",
+      "PackagePath": "staticwebassets\\Resources\\VictoryComponentRes\\Champion Documents\\Elite Mode Brutal.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\VictoryComponentRes\\Champion Documents\\Elite Mode.txt",
+      "PackagePath": "staticwebassets\\Resources\\VictoryComponentRes\\Champion Documents\\Elite Mode.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\VictoryComponentRes\\Champion Documents\\Thank You.txt",
+      "PackagePath": "staticwebassets\\Resources\\VictoryComponentRes\\Champion Documents\\Thank You.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\Resources\\VictoryComponentRes\\Important References\\Serial Experiments Lain.txt",
+      "PackagePath": "staticwebassets\\Resources\\VictoryComponentRes\\Important References\\Serial Experiments Lain.txt"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\ClassifiedFileBrowserComponent.css",
+      "PackagePath": "staticwebassets\\css\\ClassifiedFileBrowserComponent.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\EliteModeEndScreen.css",
+      "PackagePath": "staticwebassets\\css\\EliteModeEndScreen.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\EliteModeGameplay.css",
+      "PackagePath": "staticwebassets\\css\\EliteModeGameplay.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\EliteModeSettings.css",
+      "PackagePath": "staticwebassets\\css\\EliteModeSettings.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\GatewayFileBrowserComponent.css",
+      "PackagePath": "staticwebassets\\css\\GatewayFileBrowserComponent.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\MainFrameFileBrowserComponent.css",
+      "PackagePath": "staticwebassets\\css\\MainFrameFileBrowserComponent.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\MemberFileBrowserComponent.css",
+      "PackagePath": "staticwebassets\\css\\MemberFileBrowserComponent.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\SecureFileBrowsing.css",
+      "PackagePath": "staticwebassets\\css\\SecureFileBrowsing.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\VictoryScreenComponent.css",
+      "PackagePath": "staticwebassets\\css\\VictoryScreenComponent.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\gameplaySegment.css",
+      "PackagePath": "staticwebassets\\css\\gameplaySegment.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\gameplaySegment2.css",
+      "PackagePath": "staticwebassets\\css\\gameplaySegment2.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\gameplaySegment3.css",
+      "PackagePath": "staticwebassets\\css\\gameplaySegment3.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\gameplaySegment4.css",
+      "PackagePath": "staticwebassets\\css\\gameplaySegment4.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\gameplaySegment5.css",
+      "PackagePath": "staticwebassets\\css\\gameplaySegment5.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\lockoutComponent.css",
+      "PackagePath": "staticwebassets\\css\\lockoutComponent.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\Classifiedai2.png",
+      "PackagePath": "staticwebassets\\images\\Classifiedai2.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\Loginai.png",
+      "PackagePath": "staticwebassets\\images\\Loginai.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\gatewayai.png",
+      "PackagePath": "staticwebassets\\images\\gatewayai.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\lockoutai.png",
+      "PackagePath": "staticwebassets\\images\\lockoutai.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\mainframeai.png",
+      "PackagePath": "staticwebassets\\images\\mainframeai.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\memberfilesai.png",
+      "PackagePath": "staticwebassets\\images\\memberfilesai.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\secureai.png",
+      "PackagePath": "staticwebassets\\images\\secureai.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\images\\victory.png",
+      "PackagePath": "staticwebassets\\images\\victory.png"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\javascriptEffects\\loginComponent.js",
+      "PackagePath": "staticwebassets\\javascriptEffects\\loginComponent.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\js\\SecureFileBrowsing.js",
+      "PackagePath": "staticwebassets\\js\\SecureFileBrowsing.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\js\\appState.js",
+      "PackagePath": "staticwebassets\\js\\appState.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\js\\eliteMode.js",
+      "PackagePath": "staticwebassets\\js\\eliteMode.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\js\\gameSegment.js",
+      "PackagePath": "staticwebassets\\js\\gameSegment.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\js\\passwordEnter.js",
+      "PackagePath": "staticwebassets\\js\\passwordEnter.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\js\\safeActions.js",
+      "PackagePath": "staticwebassets\\js\\safeActions.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\js\\setVolume.js",
+      "PackagePath": "staticwebassets\\js\\setVolume.js"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\music\\Black Suit 1a.mp3",
+      "PackagePath": "staticwebassets\\music\\Black Suit 1a.mp3"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\music\\Deus Theme.mp3",
+      "PackagePath": "staticwebassets\\music\\Deus Theme.mp3"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\music\\MJ-x-x part 2.mp3",
+      "PackagePath": "staticwebassets\\music\\MJ-x-x part 2.mp3"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\music\\Tag.mp3",
+      "PackagePath": "staticwebassets\\music\\Tag.mp3"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\music\\Track44.mp3",
+      "PackagePath": "staticwebassets\\music\\Track44.mp3"
+    },
+    {
+      "Id": "C:\\Users\\mrain\\.NetProjects\\Archive2035\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Archive2035.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Archive2035.props",
+      "PackagePath": "build\\Archive2035.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Archive2035.props",
+      "PackagePath": "buildMultiTargeting\\Archive2035.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Archive2035.props",
+      "PackagePath": "buildTransitive\\Archive2035.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,117 @@
+/* Existing Styles */
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevents any overflow issues */
+    z-index: 0;
+}
+
+body::before {
+    content: ''; /* Required for the pseudo-element to render */
+    position: absolute; /* Position it relative to the body */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+    background-image: url('../images/Loginai.png'); /* Path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.5); /* Darkens the image */
+    filter: blur(5px); /* Blurs the background image */
+    z-index: 0;
+}
+
+/* Center the login box on the page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    background-color: #000; /* Ensure the background is black */
+    z-index: 10;
+}
+
+/* Style the login box */
+.login-box {
+    background-color: #333; /* Darker box color */
+    padding: 20px;
+    width: 300px; /* Width of the login box */
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center; /* Center text inside the box */
+    z-index: 10;
+}
+
+.login-box label, 
+.login-box input, 
+.login-box .login-button {
+    width: 100%; /* Ensure elements take up full width of the box */
+    margin-bottom: 10px; /* Add spacing between elements */
+}
+
+/* Style the login button */
+.login-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+/* New Styles for Volume Control */
+
+/* Container for the volume control */
+.volume-control {
+    margin-top: 15px; /* Add some spacing above the volume control */
+    text-align: left; /* Align the label to the left */
+}
+
+/* Label for the volume control */
+.volume-control label {
+    display: block; /* Make the label a block element */
+    margin-bottom: 5px; /* Space between label and slider */
+    color: #ccc; /* Slightly lighter color for the label */
+}
+
+/* Slider itself */
+.volume-control input[type="range"] {
+    width: 100%; /* Full width inside the login box */
+    -webkit-appearance: none; /* Remove default styling */
+    height: 5px; /* Height of the slider track */
+    background: #444; /* Track color */
+    outline: none; /* Remove outline on focus */
+    border-radius: 5px; /* Rounded track edges */
+    cursor: pointer; /* Change cursor on hover */
+}
+
+/* Slider thumb (the circle you drag) */
+.volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none;
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    background: #007bff; /* Thumb color */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer; /* Change cursor on hover */
+}
+
+.volume-control input[type="range"]::-moz-range-thumb {
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    background: #007bff; /* Thumb color */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer; /* Change cursor on hover */
+}
+

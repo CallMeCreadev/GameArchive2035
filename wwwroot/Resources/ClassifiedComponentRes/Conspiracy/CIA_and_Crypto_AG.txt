@@ -1,0 +1,13 @@
+Crypto AG was a Swiss company that specialized in cryptographic communications equipment. 
+Founded in the 1940s, the company gained a reputation for providing secure communication devices to governments and organizations worldwide. 
+Being based in neutral Switzerland, Crypto AG was considered a trustworthy supplier, and its products were used by over 120 countries during the Cold War and beyond.
+In the 1970s, it was revealed that Crypto AG was secretly owned and operated by the U.S. Central Intelligence Agency (CIA) 
+and the West German intelligence agency, Bundesnachrichtendienst (BND). The operation was codenamed "Operation Rubicon" (initially known as "Operation Thesaurus"). 
+Through this ownership, the CIA and BND had control over the cryptographic algorithms used in Crypto AG's devices.
+Crypto AG provided equipment that was intentionally compromised. While customers believed they were purchasing secure communication tools, 
+the cryptographic keys and algorithms were subtly weakened, allowing the CIA and BND to decrypt intercepted messages easily. 
+Essentially, countries that bought Crypto AG products were unknowingly sharing their most sensitive communications directly with U.S. and West German intelligence.
+The operation was remarkably successful and went on for decades. It allowed the CIA and BND to monitor communications from various allies and adversaries. 
+Information gleaned through Operation Rubicon provided valuable intelligence during critical periods including the Iran hostage crisis.
+In 2020, details of Operation Rubicon were made public through an investigative report by The Washington Post, the German broadcaster ZDF, and the Swiss broadcaster SRF. 
+The report confirmed long-held suspicions and exposed the full extent of the operation.

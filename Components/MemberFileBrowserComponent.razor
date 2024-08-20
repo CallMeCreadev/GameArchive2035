@@ -1,0 +1,237 @@
+@namespace Archive2035.Components
+@using System.IO
+@inject HttpClient _httpClient 
+
+<link href="_content/Blazorise.Icons.FontAwesome/v6/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/MemberFileBrowserComponent.css?v=1.3">
+
+<body>
+    <script src="js/safeActions.js"></script>
+    <script src = "js/passwordEnter.js"></script>
+    <div class="file-browser-container">
+        <div class="file-browser">
+            <div class="file-browser-content">
+                @if (!isFileViewerOpen)
+                {
+                    @if (currentPath == "Root")
+                    {
+                        <div class="file-item folder" @onclick='() => OpenFolder("Membership Documents")'>
+                            <i class="fas fa-folder"></i> Membership
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Important Resources")'>
+                            <i class="fas fa-folder"></i> Key Information
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Secure File System")'>
+                            <i class="fas fa-folder"></i> Secure File System
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="file-item folder" @onclick="BackToRoot">
+                            <i class="fas fa-arrow-left"></i> ...
+                        </div>
+                        @if (currentPath == "Membership Documents")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/MemberComponentRes/Membership Documents/Billing.txt")'>
+                                <i class="fas fa-file"></i> Anual Billing
+                            </div>
+                             <div class="file-item folder" @onclick='() => OpenFolder("Elite Mode")'>
+                                <i class="fas fa-folder"></i> ?
+                            </div>
+                        }
+                        else if (currentPath == "Important Resources")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/MemberComponentRes/Important Resources/Security_System.txt")'>
+                                <i class="fas fa-file"></i> SecuritySystem
+                            </div>
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/MemberComponentRes/Important Resources/System_Administrator_Privileges.txt")'>
+                                <i class="fas fa-file"></i> System Administrator Privileges
+                            </div>
+                        }
+                    }
+                }
+            
+            </div>
+        </div>
+        
+        @if (isFileViewerOpen)
+        {
+            <div class="file-viewer">
+                <button class="close-button" @onclick="CloseFileViewer">X</button>
+                <pre>@fileContent</pre>
+            </div>
+        }
+        @if (IsPasswordValidatorVisible)
+        {
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <h3>Password Required</h3>
+                    <div class="modal-body">
+                        <label for="password">Enter Password:</label>
+                        <input type="password" id="password" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
+                        <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
+                        <button class="modal-button" @onclick="CloseModal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+
+@code {
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+    private string currentPath = "Root";
+    private string fileContent = string.Empty;
+    private bool isFileViewerOpen = false;
+
+
+    private string password { get; set; }
+    private bool passwordError { get; set; }
+    [Parameter] public bool IsPasswordValidatorVisible { get; set; }
+    private ElementReference modalOverlay;
+
+
+    private void HandleInputChange(ChangeEventArgs e)
+    {
+        password = e.Value?.ToString();
+    }
+
+
+    private void ClearErrorMessage(ChangeEventArgs e)
+    {
+        passwordError = false; // Reset the error flag
+        password = e.Value?.ToString(); // Update the password value (if needed)
+    }
+    private async Task HandleEnterPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Prevent double submission by setting a flag if necessary
+            await ValidatePassword();
+        }
+    }
+
+    private async Task OpenFolder(string folderName)
+    {
+
+        
+        if (folderName == "Secure File System")
+        {
+            TriggerGame();
+        }
+        else if (folderName == "Elite Mode" && !IsPasswordValidatorVisible)
+        {
+            IsPasswordValidatorVisible = true;
+            await Task.Delay(100);
+            await JSRuntime.InvokeVoidAsync("showModal");
+            // Ensure JavaScript initializes modal events
+            await JSRuntime.InvokeVoidAsync("initializeModalEvents");
+        }
+        else if (IsPasswordValidatorVisible)
+        {
+            await Task.Delay(0); // Placeholder; adjust as needed
+        }
+        else
+        {
+            currentPath = folderName;
+        }
+    }
+
+    private async Task HandleModalClose(bool isPasswordCorrect)
+    {
+        if (isPasswordCorrect)
+        {
+            IsPasswordValidatorVisible = false;
+            await Task.Delay(100);
+            await JSRuntime.InvokeVoidAsync("hideModal");
+            await OpenFolder(currentPath); // Reattempt to open the folder
+        }
+        else
+        {
+            IsPasswordValidatorVisible = true;
+        }
+    }
+
+    private async Task ValidatePassword()
+    {
+        if (password == null)
+        {
+            Console.WriteLine("Password is null");
+            return;
+        }
+
+        password = password.Trim();
+
+        Console.WriteLine("Validating Password");
+        Console.WriteLine($"Entered Password: {password}");
+
+        //Tiberium99
+        if (password == "ConstructAdditionalPylons") // Replace with actual password
+        {
+            passwordError = false;
+            await HandleModalClose(true);
+            Console.WriteLine("Calling OnEliteModeSettings");
+            TriggerEliteModeSettings();
+        }
+        else
+        {
+            passwordError = true;
+            await JSRuntime.InvokeVoidAsync("showTemporaryError", "Incorrect password, please try again.");
+        }
+    }
+
+
+    private async Task CloseModal()
+    {
+        IsPasswordValidatorVisible = false;
+        password = string.Empty; // Clear the password field when the modal is closed
+        await Task.Delay(100);
+        await JSRuntime.InvokeVoidAsync("hideModal");
+    }
+
+
+    private void BackToRoot()
+    {
+        currentPath = "Root";
+    }
+
+    private async Task OpenFile(string filePath)
+    {
+    // Directly use filePath since it's already the full path relative to the web root
+        var response = await _httpClient.GetStringAsync(filePath);
+
+        if (!string.IsNullOrEmpty(response))
+        {
+            fileContent = response; // Assuming fileContent is a string field in your component to hold the file content
+            isFileViewerOpen = true;
+            StateHasChanged(); // Notify Blazor to re-render the component
+        }
+        else
+        {
+            // Handle the case where the file could not be read, perhaps log an error or update UI accordingly
+        }
+    }
+    private void CloseFileViewer()
+    {
+        isFileViewerOpen = false;
+        fileContent = string.Empty;
+        StateHasChanged();
+    }
+
+    private void TriggerGame()
+    {
+        OnTriggerGame.InvokeAsync();
+    }
+
+    private void TriggerEliteModeSettings()
+    {
+        OnEliteModeSettings.InvokeAsync();
+    }
+
+    [Parameter] public EventCallback OnTriggerGame { get; set; }
+
+    [Parameter] public EventCallback OnEliteModeSettings { get; set; }
+}

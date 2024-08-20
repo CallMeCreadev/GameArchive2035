@@ -1,0 +1,22 @@
+@inject IJSRuntime JS
+
+<body>
+    <link href="css/lockoutComponent.css?v=1.2" rel="stylesheet" />
+    <div class="lockout-container">
+        <div class="lockout-box">
+            <h1>System Locked</h1>
+            <div class="reset-button" @onclick="ResetGame">
+                Click to restart
+            </div>
+        </div>
+    </div>
+</body>
+
+@code {
+    [Parameter] public EventCallback OnResetGame { get; set; }
+
+    private async Task ResetGame()
+    {     
+            await OnResetGame.InvokeAsync();    
+    }
+}

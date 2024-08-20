@@ -1,0 +1,11 @@
+Joseph Weizenbaum is best known for creating ELIZA in the mid-1960s, one of the first computer programs capable of processing natural language. 
+ELIZA simulated a conversation between a human and a machine by following simple, predefined scripts. The most famous script, called "Doctor," 
+mimicked a Rogerian psychotherapist by responding to user input with open-ended questions, creating the illusion of understanding.
+The term "Weizenbaum Effect" refers to the tendency of people to attribute human-like understanding and emotions to computers, 
+even when they are merely following algorithms. This phenomenon was observed with ELIZA, where users became emotionally attached to the program, 
+despite knowing it was not genuinely intelligent. Weizenbaum was critical of the idea that technology should drive synchronicity in society, 
+particularly when it comes at the cost of human values. He believed that while information systems could facilitate communication and coordination, 
+they should not dictate human thought or behavior, nor should they replace the nuanced understanding that comes from human interactions.
+Weizenbaum became increasingly critical of the field of AI, particularly the idea that computers could or should replace human judgment. 
+In his influential book "Computer Power and Human Reason: From Judgment to Calculation" (1976), he argued that there are limits 
+to what computers should be allowed to do, especially in areas requiring moral and ethical judgment.

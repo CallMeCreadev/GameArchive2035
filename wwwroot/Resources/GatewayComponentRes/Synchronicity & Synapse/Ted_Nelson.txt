@@ -1,0 +1,11 @@
+Ted Nelson is best known for coining the terms "hypertext" and "hypermedia" in the 1960s. 
+Hypertext refers to a system of managing and presenting text that allows for non-linear navigation, where documents are connected by hyperlinks. 
+Hypermedia extends this concept to include other forms of media, such as images, audio, and video, linked together in a web of connections.
+Nelson's most ambitious project is Project Xanadu, which he began conceptualizing in the 1960s. Project Xanadu was intended to be a universal library 
+and a global hypertext system that would allow users to access, link, and navigate through a vast network of documents and media.
+One of Xanadu’s key features was the idea of non-destructive editing, where every version of a document would be preserved and accessible, 
+allowing users to see the evolution of content over time.  In 1981, Nelson published "Literary Machines," 
+a book that outlined his ideas for hypertext and Project Xanadu. The book is a mix of philosophy, technical ideas, and a critique of linear text. 
+It further expanded on his vision for a global hypertext system and the possibilities it could unlock for information sharing and creativity.
+Nelson has been critical of centralized, top-down approaches to information management, advocating instead for decentralized systems 
+where users have more control over their data and the way it is linked and shared.

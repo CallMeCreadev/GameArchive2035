@@ -1,0 +1,119 @@
+@namespace Archive2035.Components
+@using System.IO
+@inject HttpClient _httpClient 
+@inject DifficultyService DifficultyService
+
+<link href="_content/Blazorise.Icons.FontAwesome/v6/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/VictoryScreenComponent.css">
+
+<body>
+    <div class="file-browser-container">
+        <div class="file-browser">
+            <div class="file-browser-content">
+                @if (!isFileViewerOpen)
+                {
+                    @if (currentPath == "Root")
+                    {
+                        <div class="file-item folder" @onclick='() => OpenFolder("Champion Documents")'>
+                            <i class="fas fa-folder"></i> Champion Documents
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Important References")'>
+                            <i class="fas fa-folder"></i> Important References
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="file-item folder" @onclick="BackToRoot">
+                            <i class="fas fa-arrow-left"></i> ...
+                        </div>
+                        @if (currentPath == "Champion Documents")
+                        {
+                            @if (DifficultySetting == "Brutal")
+                            {
+                                <div class="file-item file" @onclick='async () => await OpenFile("Resources/VictoryComponentRes/Champion Documents/Elite Mode Brutal.txt")'>
+                                    <i class="fas fa-file"></i> Elite Mode
+                                </div>
+                            }
+                            else 
+                            {
+                                <div class="file-item file" @onclick='async () => await OpenFile("Resources/VictoryComponentRes/Champion Documents/Elite Mode.txt")'>
+                                    <i class="fas fa-file"></i> Elite Mode
+                                </div>
+                            }
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/VictoryComponentRes/Champion Documents/Thank You.txt")'>
+                                <i class="fas fa-file"></i> Thank You
+                            </div>
+                        }
+                        else if (currentPath == "Important References")
+                        {
+                            <div class="file-item file" @onclick='async () => await OpenFile("Resources/VictoryComponentRes/Important References/Serial Experiments Lain.txt")'>
+                                <i class="fas fa-file"></i> Serial Experiments Lain
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+        
+        @if (isFileViewerOpen)
+        {
+            <div class="file-viewer">
+                <button class="close-button" @onclick="CloseFileViewer">X</button>
+                <pre>@fileContent</pre>
+            </div>
+        }
+    </div>
+</body>
+
+@code {
+    private string currentPath = "Root";
+    private string fileContent = string.Empty;
+    private bool isFileViewerOpen = false;
+    private string DifficultySetting;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await SetDifficultyParameters();
+    }
+
+    private async Task SetDifficultyParameters()
+    {
+        await Task.Delay(100);  // Simulate delay if needed
+        DifficultySetting = DifficultyService.SelectedDifficulty;
+    }
+
+    private void OpenFolder(string folderName)
+    {
+        currentPath = folderName;
+    }
+
+    private void BackToRoot()
+    {
+        currentPath = "Root";
+    }
+
+    private async Task OpenFile(string filePath)
+    {
+        var response = await _httpClient.GetStringAsync(filePath);
+
+        if (!string.IsNullOrEmpty(response))
+        {
+            fileContent = response;
+            isFileViewerOpen = true;
+            StateHasChanged();
+        }
+    }
+
+    private void CloseFileViewer()
+    {
+        isFileViewerOpen = false;
+        fileContent = string.Empty;
+    }
+
+    private void TriggerGame()
+    {
+        OnTriggerGame.InvokeAsync();
+    }
+
+    [Parameter] public EventCallback OnTriggerGame { get; set; }
+}
