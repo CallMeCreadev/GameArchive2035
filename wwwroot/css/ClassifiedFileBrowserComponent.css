@@ -23,21 +23,23 @@ body {
   }
 
 
-/* Center the file browser component on the page */
+/* Position the file browser component approximately 20% from the top */
 .file-browser-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Align items to the start (top) of the container */
     align-items: center;
+    padding-top: 20vh; /* Push the content down 20% of the viewport height */
     z-index: 1;
 }
+
 /* Styling for the file browser itself */
 .file-browser {
-    border: 1px solid #172e17;
+    border: 1px solid #0a3100;
     padding: 20px;
     width: 320px;
-    background-color: rgba(170, 236, 170, 0.9); /* Slightly transparent background */
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly transparent background */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     z-index: 1;
@@ -49,6 +51,7 @@ body {
     flex-direction: column;
     gap: 15px;
     z-index: 1;
+    font-size: large;
 }
 
 .file-item {
@@ -59,6 +62,7 @@ body {
     border-radius: 4px;
     transition: background-color 0.3s ease;
     z-index: 1;
+    color: white;
 }
 
 .file-item i {
@@ -66,31 +70,33 @@ body {
 }
 
 .file-item.folder {
-    color: #007bff;
+    color: white;
 }
 
 .file-item.file {
-    color: #333;
+    color: white;
 }
 
 .file-item:hover {
-    background-color: rgba(170, 236, 170, 0.9)
+    background-color: #0a3100;
 }
 
-/* Styling for the file viewer */
 .file-viewer {
     background-color: #1a1919;
     border: 1px solid #0a3100;
     padding: 20px;
     max-width: 80%; /* Adjust this to control the width */
     width: 80%; /* Ensure it takes up 80% of the container width */
-    margin: 20px auto 0 auto; /* Remove top margin and center the file viewer with some bottom margin */
+    margin: auto; /* Center the file viewer horizontally */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add some shadow for emphasis */
     border-radius: 8px; /* Match the browser styling */
-    position: fixed; /* Position relative for the close button */
-    z-index: 5;
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    position: absolute; /* Position absolute for centering within parent */
+    top: 30%; /* Move it up from the center, adjust as needed */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -30%); /* Offset by half its size to center */
+    z-index: 15;
 }
+
 
 /* Close button styling */
 .close-button {
@@ -133,7 +139,7 @@ pre {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 5;
+    z-index: 15;
 }
 
 .modal-content {
@@ -185,18 +191,19 @@ pre {
 
 
 .message-box-container {
-    margin-top: 5%;
+    position: absolute;
+    top: 60%; /* Adjust this value to control vertical placement */
+    left: 50%;
+    transform: translate(-50%, 0); /* Center it horizontally */
     background-color: rgb(39, 37, 37);
     border: 3px solid #172e17;
     color: black;
     padding: 20px;
-    z-index: 1;
-    left: 30%;
-    top: 10%;
-    z-index: 2;
+    z-index: 10; /* Ensure it's above other elements */
     width: 50%; /* Set a fixed width */
     max-width: 500px; /* Optional: set a max-width */
 }
+
 
 .message-box-container.access-granted {
     background-color: lightgrey;

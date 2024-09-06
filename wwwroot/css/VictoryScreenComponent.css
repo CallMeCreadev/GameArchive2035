@@ -1,25 +1,47 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevents any overflow issues */
+  }
+  
+  body::before {
+    content: ''; /* Required for the pseudo-element to render */
+    position: absolute; /* Position it relative to the body */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+    background-image: url('../images/Victoryai.png'); /* Path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.25); /* Darkens the image */
+    filter: blur(5px); /* Blurs the background image */
+  }
+
+
 /* Center the file browser component on the page */
 .file-browser-container {
-    height: 100vh; /* Full height of the viewport */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('../images/victory.png'); /* Corrected path */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 0; /* Ensure no extra spacing */
+    z-index: 1;
 }
 
 /* Styling for the file browser itself */
 .file-browser {
-    border: 1px solid #172e17;
+    border: 1px solid #0a3100;
     padding: 20px;
     width: 320px;
-    background-color: rgba(170, 236, 170, 0.9); /* Slightly transparent background */
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly transparent background */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    z-index: 1;
 }
 
 /* Content inside the file browser */
@@ -27,6 +49,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    z-index: 1;
+    font-size: large;
 }
 
 .file-item {
@@ -36,6 +60,8 @@
     align-items: center;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    z-index: 1;
+    color: white;
 }
 
 .file-item i {
@@ -43,15 +69,15 @@
 }
 
 .file-item.folder {
-    color: #007bff;
+    color: white;
 }
 
 .file-item.file {
-    color: #333;
+    color: white;
 }
 
 .file-item:hover {
-    background-color: rgba(170, 236, 170, 0.9)
+    background-color: #0a3100;
 }
 
 /* Styling for the file viewer */
@@ -61,10 +87,14 @@
     padding: 20px;
     max-width: 80%; /* Adjust this to control the width */
     width: 80%; /* Ensure it takes up 80% of the container width */
-    margin: 20px auto 0 auto; /* Remove top margin and center the file viewer with some bottom margin */
+    margin: auto; /* Center the file viewer horizontally */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add some shadow for emphasis */
     border-radius: 8px; /* Match the browser styling */
-    position: relative; /* Position relative for the close button */
+    position: absolute; /* Position absolute for centering within parent */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half its size to center */
+    z-index: 1;
 }
 
 /* Close button styling */
@@ -78,10 +108,12 @@
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 4px; /* Rounded corners for the button */
+    z-index: 1;
 }
 
 .close-button:hover {
     background-color: #c9302c; /* Darker shade on hover */
+    z-index: 1;
 }
 
 pre {

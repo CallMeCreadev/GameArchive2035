@@ -38,7 +38,7 @@ body::before {
 
 /* Style the login box */
 .login-box {
-    background-color: #333; /* Darker box color */
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly transparent background */
     padding: 20px;
     width: 300px; /* Width of the login box */
     border-radius: 8px;

@@ -8,13 +8,14 @@
 
 
 <body>
-    <script src = "js/passwordEnter.js"></script>
+    <script src="js/passwordEnter.js"></script>
     <script src="js/safeActions.js?v=1.1"></script>
-    <div class="file-browser-container">
-        <div class="file-browser">
-            <div class="file-browser-content">
-                @if (!isFileViewerOpen)
-                {
+
+    @if (!isFileViewerOpen)
+    {
+        <div class="file-browser-container">
+            <div class="file-browser">
+                <div class="file-browser-content">
                     @if (currentPath == "Root")
                     {
                         <div class="file-item folder" @onclick='() => OpenFolder("Modern Hacking Pt2")'>
@@ -29,7 +30,7 @@
                         <div class="file-item folder" @onclick='() => OpenFolder("Synchronicity & Synapse")'>
                             <i class="fas fa-folder"></i> Synchronicity & Synapse
                         </div>
-                    } <!-- Ensure this brace is properly placed -->
+                    }
                     else
                     {
                         <div class="file-item folder" @onclick="BackToRoot">
@@ -67,7 +68,7 @@
                         }
                         else if (currentPath == "Project Victory")
                         {
-
+                            <!-- Add files for Project Victory here -->
                         }
                         else if (currentPath == "Synchronicity & Synapse")
                         {
@@ -90,67 +91,65 @@
                                 <i class="fas fa-file"></i> Joseph Weizenbaum
                             </div>
                         }
-                    } <!-- Close the outer else block properly here -->
-                } <!-- Close the outer if block here -->
-            </div>
-        </div>
-        
-        @if (isFileViewerOpen)
-        {
-            <div class="file-viewer">
-                <button class="close-button" @onclick="CloseFileViewer">X</button>
-                <pre>@fileContent</pre>
-            </div>
-        }
-
-
-        @if (IsPasswordValidatorVisible)
-        {
-            <div class="modal-overlay">
-                <div class="modal-content">
-                    <h3>Password Required</h3>
-                    <div class="modal-body">
-                        <label for="password">Enter Password:</label>
-                        <input type="password" id="passwordkey" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
-                        <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
-                        <button class="modal-button" @onclick="CloseModal">Cancel</button>
-                    </div>
+                    }
                 </div>
             </div>
-        }
+        </div>
+    }
 
+    @if (isFileViewerOpen)
+    {
+        <div class="file-viewer">
+            <button class="close-button" @onclick="CloseFileViewer">X</button>
+            <pre>@fileContent</pre>
+        </div>
+    }
 
-        <h3>Input Codes</h3>
-        <div class="input-container">
-            <div>
-                <label for="input1">Code 1:</label>
-                <input id="input1" class="input-field" @bind="input1" placeholder="Enter code 1" />
+    @if (IsPasswordValidatorVisible)
+    {
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>Password Required</h3>
+                <div class="modal-body">
+                    <label for="password">Enter Password:</label>
+                    <input type="password" id="passwordkey" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
+                    <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
+                    <button class="modal-button" @onclick="CloseModal">Cancel</button>
+                </div>
             </div>
-            <div>
-                <label for="input2">Code 2:</label>
-                <input id="input2" class="input-field" @bind="input2" placeholder="Enter code 2" />
-            </div>
-            <div>
-                <label for="input3">Code 3:</label>
-                <input id="input3" class="input-field" @bind="input3" placeholder="Enter code 3" />
-            </div>
+        </div>
+    }
 
-            <button class="keysubmitButton" @onclick="SubmitCodes">Submit</button>
-
-            <div style="margin-top: 20px;">
-                <label for="result">Output:</label>
-                <textarea id="result" class="output-area" readonly rows="4"> 
-                    @resultText
-                </textarea>
-            </div>
-            <div id="password" style="display:none;">MvpInnovationRogue</div>
+    <h3>Input Codes</h3>
+    <div class="input-container">
+        <div>
+            <label for="input1">Code 1:</label>
+            <input id="input1" class="input-field" @bind="input1" placeholder="Enter code 1" />
+        </div>
+        <div>
+            <label for="input2">Code 2:</label>
+            <input id="input2" class="input-field" @bind="input2" placeholder="Enter code 2" />
+        </div>
+        <div>
+            <label for="input3">Code 3:</label>
+            <input id="input3" class="input-field" @bind="input3" placeholder="Enter code 3" />
         </div>
 
+        <button class="keysubmitButton" @onclick="SubmitCodes">Submit</button>
+
+        <div style="margin-top: 10px;">
+            <label for="result">Output:</label>
+            <textarea id="result" class="output-area" readonly rows="3"> 
+                @resultText
+            </textarea>
+        </div>
+        <div id="password" style="display:none;">MvpInnovationRogue</div>
     </div>
 </body>
+
 @code {
     private string currentPath = "Root";
     private string fileContent = string.Empty;

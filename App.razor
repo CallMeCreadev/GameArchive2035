@@ -4,83 +4,120 @@
 
 <div class="main-container">
     @if (isLockoutActive)
+{
+    Console.WriteLine("App: Entering Lockout State");
+    <LockoutComponent OnResetGame="HandleGameReset" />
+}
+else
+{
+    switch (currentState)
     {
-        Console.WriteLine("App: Entering Lockout State");
-        <LockoutComponent OnResetGame="HandleGameReset" />
-    }
-    else
-    {
-        @if (currentState == GameState.Login)
-        {
+        case GameState.Login:
             Console.WriteLine("App: Entering Login State");
-            <LoginComponent OnLoginSuccess="HandleLoginSuccess" />
-        }
-        else if (currentState == GameState.MemberFileBrowsing)
-        {
+            <LoginComponent OnLoginSuccess="HandleLoginSuccess" />;
+            break;
+
+        case GameState.MemberFileBrowsing:
             Console.WriteLine("App: Entering MemberFileBrowsing State");
-            <MemberFileBrowserComponent OnTriggerGame="HandleTriggerGame1" OnEliteModeSettings = "HandleEliteModeSettings" />
-        }
-        else if (currentState == GameState.GameSegment1)
-        {
+            <MemberFileBrowserComponent OnTriggerGame="HandleTriggerGame1" OnEliteModeSettings="HandleEliteModeSettings" OnGameOnly="HandleGameOnly1" />;
+            break;
+
+        case GameState.GameSegment1:
             Console.WriteLine("App: Entering GameSegment1 State");
-            <GameSegment1Component OnGameComplete="HandleGameComplete1" OnGameLockout="HandleGameLockout" />
-        }
-        else if (currentState == GameState.SecureFileBrowsing)
-        {
+            <GameSegment1Component OnGameComplete="HandleGameComplete1" OnGameLockout="HandleGameLockout" />;
+            break;
+
+        case GameState.SecureFileBrowsing:
             Console.WriteLine("App: Entering SecureFileBrowsing State");
-            <SecureFileBrowserComponent OnTriggerGame="HandleTriggerGame2" />
-        }
-        else if (currentState == GameState.GameSegment2)
-        {
+            <SecureFileBrowserComponent OnTriggerGame="HandleTriggerGame2" />;
+            break;
+
+        case GameState.GameSegment2:
             Console.WriteLine("App: Entering GameSegment2 State");
-            <GameSegment2Component OnGameComplete2="HandleGameComplete2" OnGameLockout="HandleGameLockout" />
-        }
-        else if (currentState == GameState.MainFrameFileBrowsing)
-        {
+            <GameSegment2Component OnGameComplete2="HandleGameComplete2" OnGameLockout="HandleGameLockout" />;
+            break;
+
+        case GameState.MainFrameFileBrowsing:
             Console.WriteLine("App: Entering MainFrameFileBrowsing State");
-            <MainFrameFileBrowserComponent OnTriggerGame="HandleTriggerGame3" />
-        }
-        else if (currentState == GameState.GameSegment3)
-        {
+            <MainFrameFileBrowserComponent OnTriggerGame="HandleTriggerGame3" />;
+            break;
+
+        case GameState.GameSegment3:
             Console.WriteLine("App: Entering GameSegment3 State");
-            <GameSegment3Component OnGameComplete3="HandleGameComplete3" OnGameLockout="HandleGameLockout" />
-        }
-        else if (currentState == GameState.ClassifiedFileBrowsing)
-        {
+            <GameSegment3Component OnGameComplete3="HandleGameComplete3" OnGameLockout="HandleGameLockout" />;
+            break;
+
+        case GameState.ClassifiedFileBrowsing:
             Console.WriteLine("App: Entering ClassifiedFileBrowsing State");
-            <ClassifiedFileBrowserComponent OnTriggerGame="HandleTriggerGame4" />
-        }
-        else if (currentState == GameState.GameSegment4)
-        {
+            <ClassifiedFileBrowserComponent OnTriggerGame="HandleTriggerGame4" />;
+            break;
+
+        case GameState.GameSegment4:
             Console.WriteLine("App: Entering GameSegment4 State");
-            <GameSegment4Component OnGameComplete4="HandleGameComplete4" OnGameLockout="HandleGameLockout" />
-        }
-        else if (currentState == GameState.GatewayFileBrowsing)
-        {
+            <GameSegment4Component OnGameComplete4="HandleGameComplete4" OnGameLockout="HandleGameLockout" />;
+            break;
+
+        case GameState.GatewayFileBrowsing:
             Console.WriteLine("App: Entering GatewayFileBrowsing State");
-            <GatewayFileBrowserComponent OnTriggerGame="HandleTriggerGame5" />
-        }
-        else if (currentState == GameState.GameSegment5)
-        {
+            <GatewayFileBrowserComponent OnTriggerGame="HandleTriggerGame5" />;
+            break;
+
+        case GameState.GameSegment5:
             Console.WriteLine("App: Entering GameSegment5 State");
-            <GameSegment5Component OnGameComplete5="HandleGameComplete5" OnGameLockout="HandleGameLockout" />
-        }
-        else if (currentState == GameState.VictoryScreen)
-        {
+            <GameSegment5Component OnGameComplete5="HandleGameComplete5" OnGameLockout="HandleGameLockout" />;
+            break;
+
+        case GameState.VictoryScreen:
             Console.WriteLine("App: Entering VictoryScreen State");
-            <VictoryScreenComponent />
-        }
-        else if (currentState == GameState.EliteModeSettings)
-        {
+            <VictoryScreenComponent />;
+            break;
+
+
+        case GameState.EliteModeSettings:
             Console.WriteLine("App: Entering Elite Mode Settings State");
-            <EliteModeSettingsComponent OnBeginEliteMode="HandleEliteMode" />
-        }
-        else if (currentState == GameState.EliteMode)
-        {
+            <EliteModeSettingsComponent OnBeginEliteMode="HandleEliteMode" />;
+            break;
+
+        case GameState.GameOnlySegment1:
+            Console.WriteLine("App: Entering Elite Mode Settings State");
+            <GameOnlySegment1Component OnLevelComplete="HandleGameOnly2" />;
+            break;
+
+        case GameState.GameOnlySegment2:
+            Console.WriteLine("App: Entering Elite Mode Settings State");
+            <GameOnlySegment2Component OnLevelComplete="HandleGameOnly3" />;
+            break;
+
+        case GameState.GameOnlySegment3:
+            Console.WriteLine("App: Entering Elite Mode Settings State");
+            <GameOnlySegment3Component OnLevelComplete="HandleGameOnly4" />;
+            break;
+
+        case GameState.GameOnlySegment4:
+            Console.WriteLine("App: Entering Elite Mode Settings State");
+            <GameOnlySegment4Component OnLevelComplete="HandleGameOnly5" />;
+            break;
+
+        case GameState.GameOnlySegment5:
+            Console.WriteLine("App: Entering Elite Mode Settings State");
+            <GameOnlySegment5Component OnLevelComplete="HandleVictoryGameOnly" />;
+            break;
+
+        case GameState.VictoryScreenGameOnly:
+            Console.WriteLine("App: Entering VictoryScreen State");
+            <VictoryScreenComponentGameplayOnly />;
+            break;
+
+        case GameState.EliteMode:
             Console.WriteLine("App: Entering Elite Mode State");
-            <EliteModeComponent />
-        }
+            <EliteModeComponent />;
+            break;
+
+        default:
+            Console.WriteLine("App: Unknown State");
+            break;
     }
+}
 </div>
 
 @code {
@@ -165,6 +202,42 @@
         currentState = GameState.GameSegment5;
     }
 
+
+
+
+    private void HandleGameOnly1()
+    {
+        Console.WriteLine("App: GameOnlySegment1 called");
+        currentState = GameState.GameOnlySegment1;
+    }
+
+    private void HandleGameOnly2()
+    {
+        Console.WriteLine("App: GameOnlySegment2 called");
+        currentState = GameState.GameOnlySegment2;
+    }
+
+    private void HandleGameOnly3()
+    {
+        Console.WriteLine("App: GameOnlySegment3 called");
+        currentState = GameState.GameOnlySegment3;
+    }
+
+    private void HandleGameOnly4()
+    {
+        Console.WriteLine("App: GameOnlySegment4 called");
+        currentState = GameState.GameOnlySegment4;
+    }
+
+    private void HandleGameOnly5()
+    {
+        Console.WriteLine("App: GameOnlySegment5 called");
+        currentState = GameState.GameOnlySegment5;
+    }
+
+
+
+
     private void HandleEliteModeSettings()
     {
         Console.WriteLine("App: EliteModeSettings called");
@@ -177,6 +250,12 @@
         currentState = GameState.EliteMode; // Transition to EliteMode instead of EliteModeSettings
     }
 
+
+    private void HandleVictoryGameOnly()
+    {
+        Console.WriteLine("App: HandleVictoryGameOnly called");
+        currentState = GameState.VictoryScreenGameOnly;
+    }
 
     private void HandleGameComplete5()
     {
@@ -228,6 +307,12 @@
         VictoryScreen,
         LockoutScreen,
         EliteModeSettings,
-        EliteMode
+        EliteMode,
+        GameOnlySegment1,
+        GameOnlySegment2,
+        GameOnlySegment3,
+        GameOnlySegment4,
+        GameOnlySegment5,
+        VictoryScreenGameOnly
     }
 }

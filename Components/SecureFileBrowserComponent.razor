@@ -8,13 +8,13 @@
 <link href="css/SecureFileBrowsing.css?v=1.2" rel="stylesheet">
 
 <body>
-    <div class="file-browser-container">
-        <script src="js/SecureFileBrowsing.js"></script>
-        <script src = "js/passwordEnter.js"></script>
-        <div class="file-browser">
+    <script src="js/SecureFileBrowsing.js"></script>
+    <script src = "js/passwordEnter.js"></script>
+     @if (!isFileViewerOpen)
+    {
+        <div class="file-browser-container">
+            <div class="file-browser">
             <div class="file-browser-content">
-                @if (!isFileViewerOpen)
-                {
                     @if (currentPath == "Root")
                     {
                         <div class="file-item folder" @onclick='() => OpenFolder("Essential Reading")'>
@@ -75,9 +75,11 @@
                             </div>
                         }
                     }
-                }
+                
             </div>
         </div>
+        </div>
+        }
         @if (isFileViewerOpen)
         {
             <div class="file-viewer">
@@ -133,8 +135,6 @@
         }
     <!-- Toggle Command Line Button -->
     <button class="open-terminal-button" @onclick="ToggleTerminal" style="display: @(IsTerminalVisible ? "none" : "block")">Terminal</button>
-
-    </div>
 </body>
 @code {
 

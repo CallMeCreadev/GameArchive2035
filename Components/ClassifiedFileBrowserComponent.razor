@@ -7,12 +7,13 @@
 <link rel="stylesheet" href="css/ClassifiedFileBrowserComponent.css?v=1.1">
 
 <body>
-    <script src = "js/passwordEnter.js"></script>
-    <div class="file-browser-container">
-        <div class="file-browser">
-            <div class="file-browser-content">
-                @if (!isFileViewerOpen)
-                {
+    <script src="js/passwordEnter.js"></script>
+
+    @if (!isFileViewerOpen)
+    {
+        <div class="file-browser-container">
+            <div class="file-browser">
+                <div class="file-browser-content">
                     @if (currentPath == "Root")
                     {
                         <div class="file-item folder" @onclick='() => OpenFolder("Conspiracy")'>
@@ -27,7 +28,7 @@
                         <div class="file-item folder" @onclick='() => OpenFolder("Military Hacking")'>
                             <i class="fas fa-folder"></i> Military Hacking
                         </div>
-                    } <!-- Ensure this brace is properly placed -->
+                    }
                     else
                     {
                         <div class="file-item folder" @onclick="BackToRoot">
@@ -53,7 +54,7 @@
                         }
                         else if (currentPath == "Gateway Portal")
                         {
-  
+                            <!-- Add Gateway Portal files here -->
                         }
                         else if (currentPath == "Modern Hacking")
                         {
@@ -69,7 +70,6 @@
                             <div class="file-item file" @onclick='async () => await OpenFile("Resources/ClassifiedComponentRes/Modern Hacking/Defending_XSS.txt")'>
                                 <i class="fas fa-file"></i> Defending XSS
                             </div>
-                           
                         }
                         else if (currentPath == "Military Hacking")
                         {
@@ -86,73 +86,72 @@
                                 <i class="fas fa-file"></i> NotPetya
                             </div>
                         }
-                    } <!-- Close the outer else block properly here -->
-                } <!-- Close the outer if block here -->
+                    }
+                </div>
             </div>
         </div>
-        
-        @if (isFileViewerOpen)
-        {
-            <div class="file-viewer">
-                <button class="close-button" @onclick="CloseFileViewer">X</button>
-                <pre>@fileContent</pre>
-            </div>
-        }
+    }
 
-        @if (IsPasswordValidatorVisible)
-        {
-            <div class="modal-overlay">
-                <div class="modal-content">
-                    <h3>Password Required</h3>
-                    <div class="modal-body">
-                        <label for="password">Enter Password:</label>
-                        <input type="password" id="password" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
-                        <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
-                        <button class="modal-button" @onclick="CloseModal">Cancel</button>
-                    </div>
+    @if (isFileViewerOpen)
+    {
+        <div class="file-viewer">
+            <button class="close-button" @onclick="CloseFileViewer">X</button>
+            <pre>@fileContent</pre>
+        </div>
+    }
+
+    @if (IsPasswordValidatorVisible)
+    {
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>Password Required</h3>
+                <div class="modal-body">
+                    <label for="password">Enter Password:</label>
+                    <input type="password" id="password" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
+                    <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
+                    <button class="modal-button" @onclick="CloseModal">Cancel</button>
                 </div>
             </div>
-        }
+        </div>
+    }
 
-        
-                
-            <div class="message-box-container @(IsAccessGranted ? "access-granted" : "")">
-            <div class="message-container">
-                @foreach (var message in Messages)
-                {
-                    <div>@message</div> <!-- Each message should be inside a div -->
-                }
-            </div>
-            @if (!IsAccessGranted)
+    <div class="message-box-container @(IsAccessGranted ? "access-granted" : "")">
+        <div class="message-container">
+            @foreach (var message in Messages)
             {
-                <div>
-                    <input @bind="AccessCode" placeholder="Enter Access Code" />
-                    <button class="submit-button" @onclick="CheckAccessCode">Submit</button>
-                </div>
+                <div>@message</div> <!-- Each message should be inside a div -->
             }
+        </div>
+        @if (!IsAccessGranted)
+        {
             <div>
-                <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
-                        @onclick="() => HandleButtonPress(Button1Text)" 
-                        disabled="@(IsAccessGranted ? null : true)">
-                    @Button1Text
-                </button>
-                <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
-                        @onclick="() => HandleButtonPress(Button2Text)" 
-                        disabled="@(IsAccessGranted ? null : true)">
-                    @Button2Text
-                </button>
-                <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
-                        @onclick="() => HandleButtonPress(Button3Text)" 
-                        disabled="@(IsAccessGranted ? null : true)">
-                    @Button3Text
-                </button>
+                <input @bind="AccessCode" placeholder="Enter Access Code" />
+                <button class="submit-button" @onclick="CheckAccessCode">Submit</button>
             </div>
+        }
+        <div>
+            <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
+                    @onclick="() => HandleButtonPress(Button1Text)" 
+                    disabled="@(IsAccessGranted ? null : true)">
+                @Button1Text
+            </button>
+            <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
+                    @onclick="() => HandleButtonPress(Button2Text)" 
+                    disabled="@(IsAccessGranted ? null : true)">
+                @Button2Text
+            </button>
+            <button class="message-box-button @(IsAccessGranted ? "enabled" : "")" 
+                    @onclick="() => HandleButtonPress(Button3Text)" 
+                    disabled="@(IsAccessGranted ? null : true)">
+                @Button3Text
+            </button>
         </div>
     </div>
 </body>
+
 
 @code {
     private string currentPath = "Root";
@@ -418,7 +417,7 @@
     {
         SendMessage("I have a final question for you, who founded the Free Software Foundation (FSF)?");
         Button1Text = "Linus Torvalds";
-        Button2Text = "Markus Persson";
+        Button2Text = "Hakon Wium Lie";
         Button3Text = "Richard Stallman";
     }
 

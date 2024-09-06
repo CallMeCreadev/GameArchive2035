@@ -48,7 +48,7 @@
         { "Users\\sysadmin", new List<string> { "readme.txt", "Classified", "AdvancedHacking", "Infrastructure", "WorkOrders"  } },
         { "Users\\sysadmin\\AdvancedHacking", new List<string> { "Morris_Worm.txt", "Aleph_One.txt", "Code_Red_Worm.txt", "Heartbleed.txt", "Executing_Buffer_Overflow.txt", "Defending_Buffer_Overflow.txt"} },
         { "Users\\sysadmin\\Infrastructure", new List<string> { "Gateway_Access_Design.txt", "Mainframe_Memory_locations.txt" } },
-        { "Users\\sysadmin\\WorkOrders", new List<string> { "TODO_Work_Order_Naming.txt", "TODO_Classified_Chat_Vulnerability.txt", "TODO_Gateway_Critical_Vulnerability.txt", ".StagenetLogs.txt" } },
+        { "Users\\sysadmin\\WorkOrders", new List<string> { "TODO_Work_Order_Naming_Vulnerability.txt", "TODO_Classified_Chat_Vulnerability.txt", "TODO_Gateway_Critical_Vulnerability.txt", ".StagenetLogs.txt" } },
         { "Users\\sysadmin\\Classified", new List<string> { "placeholder.txt" } } 
     };
 
@@ -57,7 +57,7 @@
         // Define file content for each file
         { "Users\\sysadmin\\readme.txt", @"
         You now have permission to edit the names of files in the WorkOrders directory using the mv command.
-        Example: mv TODO_vulnerability.txt  DONE_vulnerability.txt" },
+        Example: mv Current_File_Name.txt  New_File_Name.txt" },
         
 
         { "Users\\sysadmin\\AdvancedHacking\\Morris_Worm.txt", @"The Morris Worm exploited the Unix Operating Systems fingerd service in 1988. 
@@ -112,8 +112,10 @@
 
 
         { "Users\\sysadmin\\Infrastructure\\Gateway_Access_Design.txt", @"
-        We use a system of user inputs that when validated internally will modify the HTML of our Gateway page to display the password so that approved users can enter it and access
-        Project Victory. Our HTML for the password element is <div id='password' style='display:none;'>??????</div> for security reasons 
+        Our most critical file is protected by a system of 3 keys and only when all are correct 
+        does the our ultimate access code display itself. We currently have a system in place to display the entered values from members trying to get access.
+        We currently use enteredValue = document.getElementById('inputBox').value to get the value from the 3 input boxs followed by document.write('Key Value: ' + enteredValue); 
+        Our HTML for the password element is <div id='password' style='display:none;'>??????</div> for security reasons 
         I have redacted the value, once the keys have been accepted our internal javascript code will alter the display from none to block allowing it to be viewed." },
 
 
@@ -131,10 +133,9 @@
         we are currently getting a valid AuthToken with the following query: SELECT MessengerAuthToken from Authorized Where Userkey = '+ UserInput +' 
         ORDER BY PermissionLevel DESC LIMIT 1. We need to make sure that this query is parameterized using command.Parameters.AddWithValue(). "},
         
-        { "Users\\sysadmin\\WorkOrders\\TODO_Gateway_Critical_Vulnerability.txt", @"Our most critical file is protected by a system of 3 keys and only when all are correct 
-        does the our ultimate access code display itself. We currently have a system in place to display the entered values from members trying to get access. We have some old javascript code
-        that needs to be updated. We currently use enteredValue = document.getElementById('inputBox').value to get the value from the 3 input boxs followed by document.write('Key Value: ' + enteredValue); 
-        This is vulnerable to a user that injects javascript into the input boxs. We should be using the textContent javascript property. For example var displayElement = document.getElementById('displayBox');
+        { "Users\\sysadmin\\WorkOrders\\TODO_Gateway_Critical_Vulnerability.txt", @" This is vulnerable to a user that injects javascript into the input boxs.
+        For example A malicious user could view the access code by submitting <script>document.getElementById('password').style.display='block';</script 
+        We should be using the textContent javascript property. For example var displayElement = document.getElementById('displayBox')
         can be used to get the display element we want to write to and displayElement.textContent = 'Key Value: ' + enteredValue; can be used to ensure that any value will be
         processed and displayed as plain text." },
 

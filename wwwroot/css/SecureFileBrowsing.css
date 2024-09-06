@@ -25,17 +25,15 @@ body {
   }
 
 
-/* Main container for file browser */
+/* Center the file browser component on the page */
 .file-browser-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0;
     z-index: 1;
 }
-
 
 /* Terminal container */
 .terminal-container {
@@ -92,7 +90,8 @@ body {
     position: absolute;
     bottom: 10%;
     left: 5%;
-    background-color: #2743c0;
+    background-color: black;
+    border: 1px solid #0a3100;    
     color: white;
     border: none;
     padding: 10px 20px;
@@ -103,22 +102,24 @@ body {
 .open-terminal-button:hover {
     background-color: #314433;
 }
-/* Other existing styles remain the same */
+/* Styling for the file browser itself */
 .file-browser {
-    border: 1px solid #172e17;
+    border: 1px solid #0a3100;
     padding: 20px;
     width: 320px;
-    background-color: rgba(170, 236, 170, 0.9);
+    background-color: rgba(0, 0, 0, 0.85); /* Slightly transparent background */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     z-index: 1;
 }
 
+/* Content inside the file browser */
 .file-browser-content {
     display: flex;
     flex-direction: column;
     gap: 15px;
     z-index: 1;
+    font-size: large;
 }
 
 .file-item {
@@ -129,6 +130,7 @@ body {
     border-radius: 4px;
     transition: background-color 0.3s ease;
     z-index: 1;
+    color: white;
 }
 
 .file-item i {
@@ -136,30 +138,35 @@ body {
 }
 
 .file-item.folder {
-    color: #007bff;
+    color: white;
 }
 
 .file-item.file {
-    color: #333;
+    color: white;
 }
 
 .file-item:hover {
-    background-color: rgba(170, 236, 170, 0.9);
+    background-color: #0a3100;
 }
 
+/* Styling for the file viewer */
 .file-viewer {
     background-color: #1a1919;
     border: 1px solid #0a3100;
     padding: 20px;
-    max-width: 80%;
-    width: 80%;
-    margin: 20px auto 0 auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    position: relative;
-    z-index: 20;
+    max-width: 80%; /* Adjust this to control the width */
+    width: 80%; /* Ensure it takes up 80% of the container width */
+    margin: auto; /* Center the file viewer horizontally */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add some shadow for emphasis */
+    border-radius: 8px; /* Match the browser styling */
+    position: absolute; /* Position absolute for centering within parent */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half its size to center */
+    z-index: 1;
 }
 
+/* Close button styling */
 .close-button {
     position: absolute;
     top: 10px;
@@ -169,19 +176,21 @@ body {
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 4px; /* Rounded corners for the button */
+    z-index: 1;
 }
 
 .close-button:hover {
-    background-color: #c9302c;
+    background-color: #c9302c; /* Darker shade on hover */
+    z-index: 1;
 }
 
 pre {
-    white-space: pre-wrap;
+    white-space: pre-wrap; /* Wrap long lines */
     word-wrap: break-word;
-    font-size: 16px;
-    margin: 0;
-    color: #ffffff;
+    font-size: 16px; /* Adjust font size for better readability */
+    margin: 0; /* Remove margin to avoid extra space */
+    color: #ffffff; /* Ensure text is visible against dark background */
 }
 
 #output {

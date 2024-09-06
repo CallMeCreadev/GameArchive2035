@@ -2,17 +2,19 @@
 @inject VolumeService VolumeService
 @inject DifficultyService DifficultyService
 
+
 <body>
     <div class="game-area" @ref="gameArea" @onkeydown="OnKeyPress" @onblur="OnBlur" @onfocus="OnFocus" tabindex="0">
+        <script src="js/setvolume.js"></script>
         <audio id="backgroundMusic" autoplay loop @ref="audioRef">
-        <source src="music/MJ-x-x part 2.mp3" type="audio/mp3">
+            <source src="music/Black Suit 1a.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
         <div id="timer-container">
             <div id="timer">@($"{remainingTime / 60:D2}:{remainingTime % 60:D2}")</div>
         </div>
 
-       @foreach (var target in targets)
+        @foreach (var target in targets)
         {
             <div class="@targetClass" id="@target.Id" @key="target.Id" style="@target.Style + @target.AnimationStyle" @onclick="() => TargetClicked(target)"></div>
         }
@@ -22,12 +24,27 @@
         {
             <div class="square" id="@square.Id" style="left:@square.XPos; top:@square.YPos; background-color:@square.Color;"></div>
         }
+        @if (isGameOver)
+        {
+            <div class="game-over-screen">
+                <h2>Game Over</h2>
+                <button @onclick="RestartGameSegment">Restart Level</button>
+            </div>
+        }
+        @if (isGameWon)
+        {
+            <div class="game-won-screen">
+                <h2>Level Complete!</h2>
+                <button @onclick="AdvanceNextLevel">Advance to Next Level</button>
+            </div>
+        }
+        
     </div>
 </body>
-<link href="css/gameplaySegment4.css?v=1.0" rel="stylesheet" />
-
+<link href="css/gameplaySegment.css?v=1.2" rel="stylesheet" />
 
 @code {
+
     private ElementReference audioRef;
 
     private ElementReference gameArea;
@@ -35,29 +52,31 @@
     private List<Square> squares = new();
     private List<int> xPositions = new(); // Track X positions of squares
     private List<int> yPositions = new(); // Track Y positions of squares
-
-    //Normal Difficulty
     private string targetClass = "Normal";
 
+    private bool isGameOver = false;
+    private bool isGameWon = false;
+
+    //Normal Difficulty
+
+    private bool StopTimer = false;
     private int targetSpawnRate = 1000;
     private int targetDuration = 4000;
     private  int maxTargetClicks = 17; // Max number of targets to click
     
     private int targetCount = 0;
     private int clickedCount = 0;
-    private int remainingTime = 90; // 90 seconds timer
+    private int remainingTime = 60; // 90 seconds timer
     private readonly int squareSize = 8; // Size of the square in pixels
     private int userX; // User's current X position
     private int userY; // User's current Y position
     private int centerX; // Center X position of the screen
     private int centerY; // Center Y position of the screen
-
-    private int loopCount = 0; // Track the number of completed loops
-    private readonly int maxLoops = 3; // The maximum number of loops allowed
-
-    [Parameter] public EventCallback OnGameComplete4 { get; set; }
-    [Parameter] public EventCallback OnGameLockout { get; set; }
     private CancellationTokenSource cancellationTokenSource = new();
+
+    [Parameter] public EventCallback OnLevelComplete { get; set; }
+    [Parameter] public EventCallback OnGameLockout { get; set; }
+
 
 
     private Task SetDifficultyParameters()
@@ -68,32 +87,31 @@
             case "Easy":
                 targetSpawnRate = 1400; // Slower spawn rate
                 targetDuration = 5000;  // Targets last longer
-                maxTargetClicks = 16;   // Fewer targets to click
+                maxTargetClicks = 28;   // Fewer targets to click
                 targetClass = "target_easy";
                 break;
             case "Normal":
                 targetSpawnRate = 1000; // Default spawn rate
                 targetDuration = 3500;  // Default duration
-                maxTargetClicks =  23;   // Default target count
+                maxTargetClicks = 39;   // Default target count
                 targetClass = "target_normal";
                 break;
             case "Hard":
                 targetSpawnRate = 800;  // Faster spawn rate
                 targetDuration = 2800;  // Targets last shorter time
-                maxTargetClicks = 28;   // More targets to click
+                maxTargetClicks = 49;   // More targets to click
                 targetClass = "target_hard";
                 break;
             case "Brutal":
                 targetSpawnRate = 700;  // Very fast spawn rate
                 targetDuration = 2500;  // Very short duration
-                maxTargetClicks = 32;   // Most targets to click
+                maxTargetClicks = 59;   // Most targets to click
                 targetClass = "target_brutal";
                 break;
         }
 
         return Task.CompletedTask; // Return a completed task to make this method awaitable
     }
-
     protected override async Task OnInitializedAsync()
     {
         Console.WriteLine("GameSegment1: OnInitializedAsync called");
@@ -131,81 +149,36 @@
         await JSRuntime.InvokeVoidAsync("setVolume", audioRef, VolumeService.Volume);
     }
 
-    private async Task CompleteGameSegment()
-    {
-        Console.WriteLine("gamesegment4: CompleteGameSegment called");
 
-        if (!cancellationTokenSource.Token.IsCancellationRequested)
-        {
-            loopCount++;
-
-            if (loopCount < maxLoops)
-            {
-                Console.WriteLine($"gamesegment4: Loop {loopCount} completed. Resetting game state for next loop.");
-
-                // Reset game state for the next loop
-                squares.Clear();
-                xPositions.Clear();
-                yPositions.Clear();
-                var center = await JSRuntime.InvokeAsync<int[]>("getScreenCenter");
-                centerX = center[0];
-                centerY = center[1];
-                userX = centerX;
-                userY = centerY;
-                xPositions.Add(centerX); // Initialize with center position
-                yPositions.Add(centerY);
-                clickedCount = 0;
-
-                // The while loop in StartGameAsync will handle the next loop automatically
-                StateHasChanged(); // Update the UI to reflect cleared squares
-            }
-            else
-            {
-                Console.WriteLine("gamesegment4: Maximum loops reached. Ending game.");
-                Dispose();
-                await OnGameComplete4.InvokeAsync(); // Trigger the callback to move to the next game state
-            }
-        }
-    }
     private async Task FocusGameArea()
     {
-        //Console.WriteLine("gamesegment4: Focusing game area");
-        await Task.Delay(100); // Small delay to ensure the game area is rendered
+        Console.WriteLine("GameSegment1: Focusing game area");
+        await Task.Delay(200); // Small delay to ensure the game area is rendered
         await gameArea.FocusAsync();
     }
 
     private async Task OnBlur()
     {
-        //Console.WriteLine("gamesegment4: Game area lost focus, refocusing");
+        Console.WriteLine("GameSegment1: Game area lost focus, refocusing");
         // If the game area loses focus, try to regain it
         await FocusGameArea();
     }
 
     private void OnFocus()
     {
-        //Console.WriteLine("gamesegment4: Game area gained focus");
+        Console.WriteLine("GameSegment1: Game area gained focus");
         // Handle the focus event if necessary
     }
 
-
-    private async Task FailGameSegment()
-    {
-        Console.WriteLine("GameSegment1: FailGameSegment called, ending game segment");
-        if (!cancellationTokenSource.Token.IsCancellationRequested)
-        {
-            Dispose();
-            await OnGameLockout.InvokeAsync(); // Trigger the callback to move to the next game state
-        }
-    }
-
-
      private async Task StartGameAsync(CancellationToken cancellationToken)
     {
-        Console.WriteLine("gamesegment5: Starting game loop");
+        Console.WriteLine("gamesegment1: Starting game loop");
+        Console.WriteLine("SpanwRate:" + targetSpawnRate);
+        Console.WriteLine("TargetClass: " + targetClass);
         while (!cancellationToken.IsCancellationRequested)
         {
-            Console.WriteLine("ClickedCount " + clickedCount);
-            Console.WriteLine("maxTragetClicks " + maxTargetClicks);
+            //Console.WriteLine("ClickedCount " + clickedCount);
+            //Console.WriteLine("maxTragetClicks " + maxTargetClicks);
             if (clickedCount < maxTargetClicks && targets.Count < 4)
             {
                 AddNewTarget();
@@ -214,17 +187,17 @@
             else if (clickedCount >= maxTargetClicks)
             {
                 
-                Console.WriteLine("gamesegment5: Max target clicks reached, checking squares...");
+                //Console.WriteLine("gamesegment1: Max target clicks reached, checking squares...");
                 if (CheckIfAllSquaresAreWhite())
                 {
-                    Console.WriteLine("gamesegment5: All squares are white, breaking loop");
+                    Console.WriteLine("gamesegment1: All squares are white, breaking loop");
                     break; // Break out of the loop if all squares are white
                 }
                 await Task.Delay(150); // Checks the squares every 0.2 seconds
             }
             
         }
-        Console.WriteLine("gamesegment5: Game loop ended");
+        Console.WriteLine("gamesegment1: Game loop ended");
 
         // End the game after exiting the loop
         if (!cancellationToken.IsCancellationRequested)
@@ -235,8 +208,7 @@
     
     private async void AddNewTarget()
     {
-        //Console.WriteLine($"gamesegment4: Adding new target, clickedCount = {clickedCount}, targetCount = {targetCount}");
-        if (clickedCount >= maxTargetClicks) return; // Stop adding targets after maxTargetClicks
+        if (clickedCount >= maxTargetClicks || cancellationTokenSource.Token.IsCancellationRequested) return; // Stop adding targets if max clicks reached or canceled
 
         var targetId = "target-" + targetCount++; // Assign unique ID to each target
         var target = new Target
@@ -254,10 +226,9 @@
     private async Task RemoveTargetAfterDelay(Target target)
     {
         await Task.Delay(targetDuration); // Target decays after 2.5 seconds
-        if (targets.Contains(target))
+        if (targets.Contains(target) && !cancellationTokenSource.Token.IsCancellationRequested)
         {
             targets.Remove(target);
-            //Console.WriteLine($"gamesegment4: Target removed, target ID = {target.Id}");
             StateHasChanged();
         }
     }
@@ -266,7 +237,6 @@
     {
         clickedCount++;
         targets.Remove(target);
-        //Console.WriteLine($"gamesegment4: Target clicked, clickedCount = {clickedCount}");
         AddNewSquare(); // Add a square when a target is clicked
         StateHasChanged();
 
@@ -276,9 +246,73 @@
         }
     }
 
+    private async Task CompleteGameSegment()
+    {
+        isGameWon = true;
+        StopTimer = true;
+        
+    }
+
+    private async Task AdvanceNextLevel()
+    {
+        Console.WriteLine("Advance Level called, ending game segment");
+        if (!cancellationTokenSource.Token.IsCancellationRequested)
+        {
+            Dispose(); // Clean up the current game segment to stop ongoing tasks
+            await Task.Delay(250); // Wait for 1 second
+            await OnLevelComplete.InvokeAsync(); // Trigger the callback to move to the next game state
+        }
+    }
+
+
+    private async Task FailGameSegment()
+    {
+        isGameOver = true;
+        Console.WriteLine("isGameOver set to true");
+        Dispose(); // Clean up the current game segment to stop ongoing tasks
+    }
+
+    private void InitializeGameArea(int[] center)
+    {
+        centerX = center[0];
+        centerY = center[1];
+        userX = centerX;
+        userY = centerY;
+        xPositions.Add(centerX); // Initialize with center position
+        yPositions.Add(centerY);
+    }
+
+
+    private async Task RestartGameSegment()
+    {
+        isGameOver = false;
+ 
+        targetCount = 0;
+        clickedCount = 0;
+        remainingTime = 60; // Reset the timer to 60 seconds
+
+        // Clear existing targets and squares
+        targets.Clear();
+        squares.Clear();
+        xPositions.Clear();
+        yPositions.Clear();
+
+        // Reinitialize the game area
+        var center = await JSRuntime.InvokeAsync<int[]>("getScreenCenter");
+        InitializeGameArea(center);
+
+        // Restart the game loop and timer
+        cancellationTokenSource = new CancellationTokenSource();
+        _ = StartGameAsync(cancellationTokenSource.Token);
+        _ = StartTimerAsync(cancellationTokenSource.Token);
+        
+        // Update the UI
+        StateHasChanged();
+    }
+
     public void Dispose()
     {
-        Console.WriteLine("GameSegment2: Disposing, canceling tasks");
+        Console.WriteLine("GameSegment1: Disposing, canceling tasks");
          VolumeService.OnVolumeChanged -= OnVolumeChanged;
         cancellationTokenSource.Cancel();
         cancellationTokenSource.Dispose();
@@ -286,32 +320,31 @@
 
     private async Task StartTimerAsync(CancellationToken cancellationToken)
     {
-        //Console.WriteLine("gamesegment4: Timer started");
-        while (remainingTime > 0 && !cancellationToken.IsCancellationRequested)
+        Console.WriteLine("GameSegment1: Timer started");
+        while (remainingTime > 0 && !cancellationToken.IsCancellationRequested && !StopTimer)
         {
-            //Console.WriteLine($"gamesegment4: Timer: {remainingTime} seconds remaining");
-            await Task.Delay(1500); // Wait for 1 second
+            await Task.Delay(1000); // Wait for 1 second
             remainingTime--;
             StateHasChanged(); // Update the UI
         }
-        if (!cancellationToken.IsCancellationRequested)
+        if (!cancellationToken.IsCancellationRequested && !StopTimer)
         {
-            //Console.WriteLine("gamesegment4: Timer finished, ending game segment");
+            Console.WriteLine("GameSegment1: Timer finished, ending game segment (Fail)");
             await FailGameSegment(); // End the game when the timer reaches 0
         }
     }
+
+
     private string GenerateRandomPosition()
     {
         var random = new Random();
         var top = random.Next(10, 90); // Random position on Y-axis
         var left = random.Next(10, 90); // Random position on X-axis
-        //Console.WriteLine($"gamesegment4: Generated random position: top={top}%, left={left}%");
         return $"top: {top}%; left: {left}%;";
     }
 
     private void AddNewSquare()
     {
-        //Console.WriteLine("gamesegment4: Adding new square");
         var random = new Random();
         int newX = xPositions.Any() ? xPositions[^1] : centerX; // Use previous X position or default to center
         int newY = yPositions.Any() ? yPositions[^1] : centerY; // Use previous Y position or default to center
@@ -344,7 +377,6 @@
             // Check if the position is valid (not overlapping any existing square)
             if (!xPositions.Contains(newX) || !yPositions.Contains(newY))
             {
-                //Console.WriteLine($"gamesegment4: New square position valid - X: {newX}, Y: {newY}");
                 validPosition = true;
             }
         }
@@ -369,13 +401,18 @@
             Color = squares.Count == 0 ? "white" : "red" // First square is white, others are red
         };
 
+        Console.WriteLine("Square X: " + newX + "Square Y: " + newY);
         squares.Add(newSquare);
-        Console.WriteLine("New Square Added: "+ newX +","+newY);
         StateHasChanged(); // Update the UI to show the new square
     }
- 
+
     private void OnKeyPress(KeyboardEventArgs e)
     {
+        if (isGameWon || isGameOver)
+        {
+            return;
+        }
+
         if (xPositions.Count <= 1 || yPositions.Count <= 1 || squares.Count <= 1)
         {
             Console.WriteLine("Error: Positions or squares are not initialized.");
@@ -401,7 +438,7 @@
                 break;
         }
 
-        Console.WriteLine($"gamesegment5: User moved to - X: {newX}, Y: {newY} - Previous X: {userX}, Y: {userY}");
+        Console.WriteLine($"gamesegment1: User moved to - X: {newX}, Y: {newY} - Previous X: {userX}, Y: {userY}");
 
         // Check if the new position matches any existing square
         bool matchFound = false;
@@ -440,22 +477,12 @@
     {
         if (squares.Count >= maxTargetClicks && squares.All(s => s.Color == "white"))
         {
-            if (loopCount < (maxLoops - 1))
-            {
-                Console.WriteLine("gamesegment4: All squares are white, condition met. Proceeding to the next loop.");
-                _ = CompleteGameSegment(); // Proceed to the next loop
-                return false; // Do not end the game yet, continue looping
-            }
-            else
-            {
-                Console.WriteLine("gamesegment4: All squares are white and final loop completed. Ending game.");
-                _ = CompleteGameSegment(); // End the game
-                return true; // End the game
-            }
+            Console.WriteLine("GameSegment1: All squares are white, condition met");
+            return true; // All squares are white, condition met
         }
         else
         {
-            //Console.WriteLine("gamesegment4: Not all squares are white or square count mismatch");
+            //Console.WriteLine("GameSegment1: Not all squares are white or square count mismatch");
             return false; // Condition not met
         }
     }

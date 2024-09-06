@@ -3,16 +3,16 @@
 @inject HttpClient _httpClient 
 
 <link href="_content/Blazorise.Icons.FontAwesome/v6/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/MemberFileBrowserComponent.css?v=1.3">
+<link rel="stylesheet" href="css/MemberFileBrowserComponent.css?v=1.4">
 
 <body>
     <script src="js/safeActions.js"></script>
-    <script src = "js/passwordEnter.js"></script>
-    <div class="file-browser-container">
-        <div class="file-browser">
-            <div class="file-browser-content">
-                @if (!isFileViewerOpen)
-                {
+    <script src="js/passwordEnter.js"></script>
+    @if (!isFileViewerOpen)
+    {
+        <div class="file-browser-container">
+            <div class="file-browser">
+                <div class="file-browser-content">
                     @if (currentPath == "Root")
                     {
                         <div class="file-item folder" @onclick='() => OpenFolder("Membership Documents")'>
@@ -22,7 +22,10 @@
                             <i class="fas fa-folder"></i> Key Information
                         </div>
                         <div class="file-item folder" @onclick='() => OpenFolder("Secure File System")'>
-                            <i class="fas fa-folder"></i> Secure File System
+                            <i class="fas fa-folder"></i> Secure Files (Story Mode)
+                        </div>
+                        <div class="file-item folder" @onclick='() => OpenFolder("Gameplay Only")'>
+                            <i class="fas fa-folder"></i> Gameplay Only Mode
                         </div>
                     }
                     else
@@ -33,7 +36,7 @@
                         @if (currentPath == "Membership Documents")
                         {
                             <div class="file-item file" @onclick='async () => await OpenFile("Resources/MemberComponentRes/Membership Documents/Billing.txt")'>
-                                <i class="fas fa-file"></i> Anual Billing
+                                <i class="fas fa-file"></i> Annual Billing
                             </div>
                              <div class="file-item folder" @onclick='() => OpenFolder("Elite Mode")'>
                                 <i class="fas fa-folder"></i> ?
@@ -49,37 +52,38 @@
                             </div>
                         }
                     }
-                }
-            
-            </div>
-        </div>
-        
-        @if (isFileViewerOpen)
-        {
-            <div class="file-viewer">
-                <button class="close-button" @onclick="CloseFileViewer">X</button>
-                <pre>@fileContent</pre>
-            </div>
-        }
-        @if (IsPasswordValidatorVisible)
-        {
-            <div class="modal-overlay">
-                <div class="modal-content">
-                    <h3>Password Required</h3>
-                    <div class="modal-body">
-                        <label for="password">Enter Password:</label>
-                        <input type="password" id="password" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
-                        <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
-                        <button class="modal-button" @onclick="CloseModal">Cancel</button>
-                    </div>
                 </div>
             </div>
-        }
-    </div>
+        </div>
+    }
+
+    @if (isFileViewerOpen)
+    {
+        <div class="file-viewer">
+            <button class="close-button" @onclick="CloseFileViewer">X</button>
+            <pre>@fileContent</pre>
+        </div>
+    }
+
+    @if (IsPasswordValidatorVisible)
+    {
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>Password Required</h3>
+                <div class="modal-body">
+                    <label for="password">Enter Password:</label>
+                    <input type="password" id="password" @bind="password" @oninput="ClearErrorMessage" @onkeydown="HandleEnterPress" />
+                    <p id="password-error" style="color:red; display:@(passwordError ? "block" : "none");">Incorrect password, please try again.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-button modal-button-submit" @onclick="ValidatePassword">Submit</button>
+                    <button class="modal-button" @onclick="CloseModal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    }
 </body>
+
 
 @code {
     [Inject] private IJSRuntime JSRuntime { get; set; }
@@ -118,7 +122,11 @@
     {
 
         
-        if (folderName == "Secure File System")
+        if (folderName == "Gameplay Only")
+        {
+            TriggerGamePlayOnly();
+        }
+        else if(folderName == "Secure File System")
         {
             TriggerGame();
         }
@@ -226,6 +234,11 @@
         OnTriggerGame.InvokeAsync();
     }
 
+    private void TriggerGamePlayOnly()
+    {
+        OnGameOnly.InvokeAsync();
+    }
+
     private void TriggerEliteModeSettings()
     {
         OnEliteModeSettings.InvokeAsync();
@@ -234,4 +247,6 @@
     [Parameter] public EventCallback OnTriggerGame { get; set; }
 
     [Parameter] public EventCallback OnEliteModeSettings { get; set; }
+
+    [Parameter] public EventCallback OnGameOnly { get; set; }
 }
