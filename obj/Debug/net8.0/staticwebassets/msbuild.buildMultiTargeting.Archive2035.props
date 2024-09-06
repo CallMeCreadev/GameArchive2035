@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Archive2035.props" />
-</Project>
