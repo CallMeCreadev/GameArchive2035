@@ -75,32 +75,32 @@ else
 
         case GameState.EliteModeSettings:
             Console.WriteLine("App: Entering Elite Mode Settings State");
-            <EliteModeSettingsComponent OnBeginEliteMode="HandleEliteMode" />;
+            <EliteModeSettingsComponent OnBeginEliteMode="HandleEliteMode"  />;
             break;
 
         case GameState.GameOnlySegment1:
             Console.WriteLine("App: Entering Elite Mode Settings State");
-            <GameOnlySegment1Component OnLevelComplete="HandleGameOnly2" />;
+            <GameOnlySegment1Component OnLevelComplete="HandleGameOnly2" OnGameLockout="HandleGameLockout"/>;
             break;
 
         case GameState.GameOnlySegment2:
             Console.WriteLine("App: Entering Elite Mode Settings State");
-            <GameOnlySegment2Component OnLevelComplete="HandleGameOnly3" />;
+            <GameOnlySegment2Component OnLevelComplete="HandleGameOnly3" OnGameLockout="HandleGameLockout"/>;
             break;
 
         case GameState.GameOnlySegment3:
             Console.WriteLine("App: Entering Elite Mode Settings State");
-            <GameOnlySegment3Component OnLevelComplete="HandleGameOnly4" />;
+            <GameOnlySegment3Component OnLevelComplete="HandleGameOnly4" OnGameLockout="HandleGameLockout"/>;
             break;
 
         case GameState.GameOnlySegment4:
             Console.WriteLine("App: Entering Elite Mode Settings State");
-            <GameOnlySegment4Component OnLevelComplete="HandleGameOnly5" />;
+            <GameOnlySegment4Component OnLevelComplete="HandleGameOnly5" OnGameLockout="HandleGameLockout"/>;
             break;
 
         case GameState.GameOnlySegment5:
             Console.WriteLine("App: Entering Elite Mode Settings State");
-            <GameOnlySegment5Component OnLevelComplete="HandleVictoryGameOnly" />;
+            <GameOnlySegment5Component OnLevelComplete="HandleVictoryGameOnly" OnGameLockout="HandleGameLockout"/>;
             break;
 
         case GameState.VictoryScreenGameOnly:

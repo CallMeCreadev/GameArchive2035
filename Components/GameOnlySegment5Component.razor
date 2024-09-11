@@ -26,6 +26,7 @@
         {
             <div class="game-over-screen">
                 <h2>Game Over</h2>
+                <h2>Lives: @AttemptsRemaining</h2>
                 <button @onclick="RestartGameSegment">Restart Level</button>
             </div>
         }
@@ -52,6 +53,7 @@
         //Normal Difficulty
     private string targetClass = "Normal";
 
+    private int AttemptsRemaining = 4;
     private bool isGameOver = false;
     private bool isGameWon = false;
 
@@ -251,14 +253,17 @@
         }
     }
 
-
     private async Task FailGameSegment()
     {
         isGameOver = true;
+        AttemptsRemaining -= 1;
         Dispose(); // Clean up the current game segment to stop ongoing tasks
+        if(AttemptsRemaining < 1)
+        {
+            await OnGameLockout.InvokeAsync(); // Trigger the callback to move to the next game state
+        }
     }
-
-
+    
     private async Task RestartGameSegment()
     {
         isGameOver = false;
