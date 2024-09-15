@@ -65,7 +65,7 @@
     private int targetDuration = 4000;
     private  int maxTargetClicks = 17; // Max number of targets to click
 
-    private int AttemptsRemaining = 4;
+    private int AttemptsRemaining = 3;
     
     private int targetCount = 0;
     private int clickedCount = 0;
@@ -321,7 +321,7 @@
     public void Dispose()
     {
         Console.WriteLine("GameSegment1: Disposing, canceling tasks");
-         VolumeService.OnVolumeChanged -= OnVolumeChanged;
+        VolumeService.OnVolumeChanged -= OnVolumeChanged;
         cancellationTokenSource.Cancel();
         cancellationTokenSource.Dispose();
     }
