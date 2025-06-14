@@ -1,0 +1,10 @@
+Vannevar Bush was an American engineer, inventor, and science administrator, best known for his work during World War II 
+and his role in developing the U.S. military-industrial complex. He also served as the head of the U.S. Office of Scientific 
+Research and Development (OSRD), where he oversaw projects like the development of the atomic bomb.
+
+In 1945, Bush wrote an influential essay titled "As We May Think," in which he proposed the concept of the Memex—
+a theoretical machine that would allow individuals to store and retrieve information efficiently. 
+The Memex is often considered a precursor to the modern concept of hypertext and personal computing. 
+It envisioned a system where data could be linked together through associative trails, 
+laying the groundwork for the development of the internet and digital information systems.
+

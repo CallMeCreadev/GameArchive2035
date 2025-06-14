@@ -1,0 +1,12 @@
+The Morris Worm, released on November 2, 1988, is often considered the first major computer worm to spread across the Internet. 
+It was created by Robert Tappan Morris, a graduate student at Cornell University, as an experiment to gauge the size of the Internet. 
+However, due to a programming error, the worm replicated more aggressively than intended, causing widespread disruption.
+While Morris publicly stated that the worm was an unintended experiment gone wrong, conspiracy theories began to circulate, 
+suggesting that the worm might have had ties to the NSA or other government agencies. These theories were fueled by several factors:
+Robert Tappan Morris's father, Robert Morris Sr., was a prominent cryptographer who worked at Bell Labs 
+and later became the chief scientist at the NSA's National Computer Security Center. 
+His position and expertise in cybersecurity fueled speculation that his son might have been involved in a covert NSA operation or experiment.
+The worm was released during a period of heightened awareness and concern about cybersecurity. 
+The NSA and other government agencies were increasingly interested in the security of the Internet and networks, 
+leading some to speculate that the worm might have been a deliberate test or demonstration of vulnerabilities.
+While it's possible that the NSA monitored the incident or studied the worm's effects, there is no substantiated link between the NSA and the creation of the worm.

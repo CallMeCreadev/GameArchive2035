@@ -1,0 +1,21 @@
+Cross-Site-Scripting (XSS) vulnerabilities can be categorized into three main types:
+Stored XSS (Persistent XSS):
+In stored XSS, the malicious script is permanently stored on the target server, such as in a database, comment field, or forum post. 
+When a user retrieves the stored data from the server, the script is delivered and executed in their browser.
+Example: A user posts a comment on a blog that contains a script tag with malicious JavaScript. Every time someone views that blog post, the script executes in their browser.
+
+Reflected XSS:
+Reflected XSS occurs when the malicious script is not stored on the server but is immediately reflected back to the user. 
+This often happens when the input is included in the URL or sent via GET/POST requests.
+Example: A user clicks on a malicious link that contains a script in the URL. 
+The website reflects this script back in the response, causing it to execute in the user's browser.
+
+DOM-Based XSS:
+DOM-based XSS is a form of XSS where the vulnerability is in the client-side code (JavaScript) rather than the server-side code. 
+The malicious script modifies the DOM (Document Object Model) environment directly in the user’s browser, without needing to interact with the server.
+Example: A web page dynamically generates content based on user input or URL parameters, and this input is directly injected into the DOM without proper sanitization, 
+leading to the execution of malicious scripts.
+Some simple and safe examples of DOM-Based XSS:
+<script>alert('XSS');</script>
+<script>document.getElementById('id').style.display = 'block';</script>
+<script>document.getElementById('id').style.color = 'red';</script>

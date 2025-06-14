@@ -1,0 +1,8 @@
+In 2012, LinkedIn experienced a major data breach where 6.5 million encrypted passwords were stolen and posted on a Russian hacker forum. 
+many have attributed the breach to SQL injection vulnerabilities in LinkedIn's website, allowing attackers to access the user database.
+in 2016, it was revealed that the breach was much larger than initially believed, with approximately 167 million LinkedIn accounts compromised.
+Specifically, LinkedIn stored passwords using unsalted SHA-1 hashing, a weak encryption method that made it easier for attackers to crack the passwords. 
+Salting adds random data to the hashing process, making it much harder for attackers to reverse-engineer passwords.
+LinkedIn has not explicitly confirmed or denied whether the 2012 data breach was caused by a SQL injection attack. 
+The company did not provide detailed public information about the specific method used by attackers to gain access to their systems.
+Instead emphasis was placed on the security weaknesses that allowed the stolen data to be easily cracked once it was obtained.

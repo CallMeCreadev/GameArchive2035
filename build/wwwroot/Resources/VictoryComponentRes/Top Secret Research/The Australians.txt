@@ -1,0 +1,13 @@
+Kee Jefferys is an Australian entrepreneur and privacy advocate, recognized for his significant contributions to the technology and cryptocurrency sectors. 
+He has been instrumental in promoting privacy-focused solutions and has collaborated on various projects aimed at enhancing digital security. 
+Jefferys has played a pivotal role in advancing the movement for privacy rights in the digital age, remaining a strong advocate for decentralized technologies 
+that empower individuals to control their own data.
+Jefferys currently serves as the Chief Technology Officer (CTO) of Session, a cryptocurrency originally known as Loki. 
+He also helped develop Loki Messenger, a privacy-focused messaging app that began as a fork of Signal Messenger. 
+Designed to store data using a decentralized node system, Loki Messenger routes messages through an onion-routed network, 
+with node operators required to stake Loki tokens to participate. The app's slogan, "Low-Key Loki," reflects its commitment to maintaining user privacy.
+
+Simon Harman is an Australian entrepreneur and technology innovator, widely known as the founder of the Loki Project, now rebranded as Session. 
+Harman has been a prominent advocate for privacy and decentralization, dedicating his efforts to promoting user privacy in the digital realm. 
+His work has made him a key figure in the global movement for enhanced digital privacy and security.
+Currently, Harman is the CEO of Chainflip, a protocol that facilitates the seamless swapping of cryptocurrencies, including Ethereum, Bitcoin, and Solana. 

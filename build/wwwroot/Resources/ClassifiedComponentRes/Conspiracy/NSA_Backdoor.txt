@@ -1,0 +1,12 @@
+A backdoor is a hidden method for bypassing normal authentication or encryption in a computer system, software, or network. 
+It allows unauthorized access to the system, enabling surveillance, data exfiltration, or other malicious activities. 
+Backdoors can be intentionally built into systems by developers, either under coercion, as part of a legal requirement, or for later use by the entity that created them.
+One of the most infamous involves the Dual_EC_DRBG, a random number generator standardized by the National Institute of Standards and Technology (NIST) in 2006. 
+Random number generators are crucial for cryptography because they generate the keys used to encrypt data.
+In 2013, documents leaked by Edward Snowden suggested that the NSA had inserted a backdoor into the Dual_EC_DRBG. 
+The allegation was that the NSA had influenced the standardization of Dual_EC_DRBG, knowing that the generator had a predictable pattern that only the NSA could exploit.
+This backdoor would allow the NSA to decrypt data encrypted using the flawed generator. 
+The backlash led to NIST advising against the use of Dual_EC_DRBG, and many organizations removed it from their cryptographic libraries.
+The NSA has been heavily involved in developing and influencing encryption standards. 
+While the agency's involvement is partly due to its role in securing U.S. government communications, 
+there have been persistent allegations that the NSA has attempted to weaken encryption standards to facilitate its surveillance activities.

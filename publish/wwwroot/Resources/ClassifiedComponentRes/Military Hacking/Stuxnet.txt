@@ -1,0 +1,22 @@
+Occuring in 2010, Stuxnet is one of the most famous examples of a cyber weapon used in a military context, 
+widely believed to have been developed by the United States and Israel to target Iran's nuclear program.
+
+Stuxnet was a highly sophisticated worm that exploited multiple zero-day vulnerabilities in Microsoft Windows to spread and deliver its payload. 
+The worm's propagation began with a "patient-zero" machine, which was initially infected via a USB drive.
+
+The first vulnerability Stuxnet exploited was in the handling of .lnk files (Windows shortcut files). 
+When the icon for a specially crafted .lnk file was displayed in Windows Explorer, it triggered the execution of the malicious code embedded within the file 
+without any user interaction. This allowed Stuxnet to spread through USB drives and other removable media—
+simply viewing the contents of an infected USB drive in Windows Explorer was enough to execute the Stuxnet payload.
+
+Once a machine was infected via USB, Stuxnet exploited a second vulnerability that allowed remote code execution through the Windows Print Spooler service. 
+This enabled the worm to propagate across a network by sending malicious print requests to printers connected to other systems, 
+allowing Stuxnet to spread through shared printers and infect machines on the same network.
+
+The worm then targeted machines with network shares available, exploiting a buffer overflow in the Server service to propagate through Windows networks 
+without needing user interaction.
+
+After successfully spreading, Stuxnet specifically targeted Siemens S7 PLCs (Programmable Logic Controllers). 
+It reprogrammed these PLCs to damage uranium enrichment centrifuges while falsely reporting normal operations to monitoring systems, 
+effectively sabotaging Iran's nuclear enrichment efforts.
+

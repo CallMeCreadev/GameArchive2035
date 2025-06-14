@@ -1,0 +1,10 @@
+The Myspace XSS vulnerability, often referred to as the "Samy Worm," is an infamous examples of XSS exploitation in the early days of social media. 
+The worm was created by a security researcher named Samy Kamkar, who used XSS to propagate a self-replicating worm across the Myspace platform.
+In 2005, Myspace allowed users to customize their profiles with HTML and CSS. 
+However, the platform did not properly sanitize user input, leaving it vulnerable to XSS attacks. 
+Samy Kamkar discovered this vulnerability and crafted a payload that would execute JavaScript code when someone viewed an infected profile.
+he malicious code was designed to automatically add Samy Kamkar as a friend and display a message stating "but most of all, Samy is my hero" on the victim’s profile. 
+More importantly, the worm would replicate itself onto any profile that viewed an infected profile, causing it to spread rapidly across the platform.
+Within 20 hours, the Samy Worm had infected over 1 million Myspace profiles.
+Samy Kamkar was eventually caught and faced legal consequences. 
+He was sentenced to probation and banned from using the internet without permission from the authorities for several years.

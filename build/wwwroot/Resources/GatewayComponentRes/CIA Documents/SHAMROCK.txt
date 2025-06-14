@@ -1,0 +1,11 @@
+Operation SHAMROCK was a secret U.S. government operation that began during World War II and continued until 1975. 
+It was conducted by the National Security Agency (NSA) in collaboration with major American telecommunications companies like Western Union, RCA Global, and ITT. 
+The operation involved the systematic interception and monitoring of international telegraph and telephone communications, with the NSA gaining access to virtually 
+all international communications passing through these companies. This was done without the knowledge or consent of the public or most government officials.
+
+SHAMROCK can be seen as a precursor to modern mass surveillance practices, 
+where large-scale data collection and monitoring of communications are conducted by governments using advanced digital information systems. 
+The operation's lack of transparency and oversight raised significant ethical concerns.
+
+The program was exposed in the mid-1970s, leading to congressional investigations, most notably by the Church Committee, 
+which criticized the lack of oversight and the potential for abuse. Operation SHAMROCK was officially terminated in 1975.

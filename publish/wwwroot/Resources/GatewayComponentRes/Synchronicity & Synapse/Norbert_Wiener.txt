@@ -1,0 +1,10 @@
+Norbert Wiener is known as the father of cybernetics, a field he founded that studies the control and communication in animals, humans, and machines. 
+His seminal work, "Cybernetics: Or Control and Communication in the Animal and the Machine" (1948), laid the foundation for this new discipline, 
+which examines how systems regulate themselves through feedback loops and communication channels.
+Wiener’s work on feedback mechanisms, where the output of a system is fed back into the system as input 
+is central to understanding how automated systems (e.g., thermostats, autopilot systems) function, as well as how human and computer systems interact.
+Wiener was concerned about the social and ethical implications of automation and the increasing reliance on machines. 
+In his book "The Human Use of Human Beings" (1950), he discussed the potential dehumanization that could result from overly automated societies 
+and the importance of keeping human values at the forefront of technological development.
+Wiener was also critical of the potential misuse of cybernetic systems in warfare and totalitarian regimes. He warned that systems designed 
+without ethical considerations could lead to the erosion of human freedom and dignity.

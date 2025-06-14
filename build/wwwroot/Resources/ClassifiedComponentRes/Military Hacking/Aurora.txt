@@ -1,0 +1,10 @@
+Operation Aurora was a series of cyberattacks primarily targeting Google, Adobe, and other major companies. 
+The operation is believed to have been conducted by a state-sponsored group linked to the Chinese government
+The attackers sought to steal intellectual property, gain access to corporate secrets, and compromise the accounts of human rights activists who were using Gmail.
+The attack involved exploiting a zero-day vulnerability in Internet Explorer, allowing attackers to install malware on the computers of targeted users.
+This vulnerability was a heap buffer overflow in the mshtml.dll library, which is responsible for rendering web pages in Internet Explorer.
+A heap buffer overflow occurs when data is written to a memory buffer (a specific area of memory) and overflows into adjacent memory locations. 
+In the case of CVE-2010-0249, the vulnerability allowed attackers to craft a malicious webpage
+This would cause Internet Explorer to overwrite memory in a way that could be controlled by the attacker.
+By exploiting this overflow, the attackers could manipulate the browser's execution flow, allowing them to execute arbitrary code on the victim's machine. 
+Once inside the network, the attackers could move laterally, exfiltrating sensitive data from the victims machines.

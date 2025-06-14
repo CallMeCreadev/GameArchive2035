@@ -1,0 +1,12 @@
+If you are defending against SQL Injection you won't need to tripple check some regular expression to try and counter every string manipulation 
+someone might inject into your database.
+Back in 2002 Microsoft and Oracle both implemented their own versions of SqlCommand  and OracleCommand to simplify this.
+Here is an example:
+
+string query = "SELECT * FROM Users WHERE Username = @Username";
+SqlCommand command = new SqlCommand(query, connection);
+command.Parameters.AddWithValue("@Username", userInput);
+
+This causes the Database to identify ahead of time that the query is using placeholders.
+The Database is then able to acknowledge that the value going into @Username is data and cannot be a SQL command;
+This is because the execution plan has already been compiled and prepared before the userInput has been processed
