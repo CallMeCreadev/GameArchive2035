@@ -1,4 +1,0 @@
-C:\Users\mrain\.NetProjects\Archive2035\build\publish\web.config
-C:\Users\mrain\.NetProjects\Archive2035\build\publish\wwwroot\sample-data\weather.json
-C:\Users\mrain\.NetProjects\Archive2035\build\publish\wwwroot\_framework\blazor.boot.json
-C:\Users\mrain\.NetProjects\Archive2035\build\web.config
