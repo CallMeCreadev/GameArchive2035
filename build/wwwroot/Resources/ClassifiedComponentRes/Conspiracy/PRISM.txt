@@ -1,0 +1,18 @@
+PRISM is one of the most significant surveillance programs ever disclosed. PRISM is a clandestine surveillance program run by the National Security Agency (NSA) 
+that was first publicly revealed in June 2013 by former NSA contractor Edward Snowden. 
+The program is designed to collect and analyze data from digital communications, including emails, chat logs, social media activities, 
+stored files, voice and video calls, and other forms of online communication. 
+PRISM operates under the legal framework of the Foreign Intelligence Surveillance Act (FISA), specifically the FISA Amendments Act of 2008, 
+which allows the U.S. government to target non-U.S. citizens located outside of the United States for intelligence purposes.
+According to the Snowden leaks, companies like Microsoft, Google, Yahoo, and others were involved in the PRISM program. 
+These companies were legally required to comply with the NSA's data requests and provide access to their servers. 
+In some cases, the cooperation was voluntary, while in others, it was enforced through legal orders.
+While PRISM is intended to target non-U.S. citizens, the program inevitably sweeps up communications involving U.S. citizens and residents as well.
+The secretive nature of PRISM, and the fact that it operated under classified legal orders, 
+meant that the public was largely unaware of the program’s existence until Snowden’s disclosures.
+In response to the PRISM revelations, many tech companies began implementing stronger encryption practices. 
+For example, Google and Yahoo started encrypting data as it moved between their data centers to prevent unauthorized access. 
+End-to-end encryption, where even the company cannot access the user’s data, became more common in messaging services like WhatsApp and iMessage.
+In 2018, Microsoft introduced end-to-end encryption for Skype with the rollout of "Private Conversations." 
+This feature allowed users to have encrypted voice calls, text messages, and file transfers. 
+However, this was not the default setting and needed to be enabled for each conversation.

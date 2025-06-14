@@ -1,0 +1,10 @@
+The Role of System Administrators
+
+In our organization, system administrators are the custodians of security and functionality. 
+
+
+Access Codes
+
+System administrators are granted automatic access to our first layer of security which guards the secure file system. 
+Future Levels in our system require proper access codes.
+Due to poor security some of our systems may be hackable, some codes may even be left lying around in plain text files.

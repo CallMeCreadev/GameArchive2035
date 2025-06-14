@@ -1,0 +1,112 @@
+@inject IJSRuntime JS
+@inject VolumeService VolumeService
+@inject DifficultyService DifficultyService
+
+<body>
+    <link href="css/login.css?v=1.0" rel="stylesheet" />
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Login Page</h1>
+            <label for="username">Username</label>
+            <input id="username" @bind="username" disabled />
+
+            <label for="password">Password</label>
+            <input id="password" type="password" @bind="password" disabled />
+
+           <div class="volume-control">
+                <label for="volume">Gameplay Volume</label>
+                <input id="volume" type="range" min="0" max="1" step="0.01" value="@VolumeService.Volume" @oninput="ChangeVolume" />
+            </div>
+
+            <div class="difficulty-selector">
+            <h3>Gameplay Difficulty</h3>
+            <div>
+                <input type="radio" id="easy" value="Easy" @onchange="OnDifficultyChanged" checked="@IsChecked("Easy")" /> 
+                <label for="easy">Easy</label>
+            </div>
+            <div>
+                <input type="radio" id="normal" value="Normal" @onchange="OnDifficultyChanged" checked="@IsChecked("Normal")" /> 
+                <label for="normal">Normal</label>
+            </div>
+            <div>
+                <input type="radio" id="hard" value="Hard" @onchange="OnDifficultyChanged" checked="@IsChecked("Hard")" /> 
+                <label for="hard">Hard</label>
+            </div>
+            <div>
+                <input type="radio" id="brutal" value="Brutal" @onchange="OnDifficultyChanged" checked="@IsChecked("Brutal")" /> 
+                <label for="brutal">Brutal</label>
+            </div>
+        </div>
+
+            <div class="login-button" @onclick="StartLoginSequence">
+                Click to Begin
+            </div>
+        </div>
+    </div>
+</body>
+
+@code {
+    [Parameter] public EventCallback OnLoginSuccess { get; set; }
+
+    private string username = string.Empty;
+    private string password = string.Empty;
+
+    private bool hasTriggered = false;
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Load the JavaScript file for this component
+            await JS.InvokeVoidAsync("import", "/javascriptEffects/loginComponent.js");
+        }
+    }
+
+
+    private string selectedDifficulty = "Normal"; // Default value
+
+    private void OnDifficultyChanged(ChangeEventArgs e)
+    {
+        selectedDifficulty = e.Value.ToString();
+        DifficultyService.SelectedDifficulty = selectedDifficulty;
+    }
+
+    private bool IsChecked(string difficulty)
+    {
+        return selectedDifficulty == difficulty;
+    }
+
+    private async Task StartLoginSequence()
+    {
+        if (hasTriggered)
+        {
+            return;
+        }
+
+        hasTriggered = true;
+
+        foreach (char c in "sysadmin")
+        {
+            username += c;
+            StateHasChanged();
+            await Task.Delay(65);
+        }
+
+        for (int i = 0; 10 > i; ++i)
+        {
+            password += '*';
+            StateHasChanged();
+            await Task.Delay(75);
+        }
+
+        await Task.Delay(500);
+        await OnLoginSuccess.InvokeAsync();
+    }
+
+    private void ChangeVolume(ChangeEventArgs e)
+    {
+        double volume = Convert.ToDouble(e.Value);
+        VolumeService.SetVolume(volume);  // Update the global volume
+    }
+}

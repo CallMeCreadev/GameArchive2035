@@ -1,0 +1,6 @@
+{
+  "outputDirectory": "build/wwwroot",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

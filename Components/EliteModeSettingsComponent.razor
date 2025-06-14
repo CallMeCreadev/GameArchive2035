@@ -1,0 +1,81 @@
+@inject EliteModeSettingsService EliteModeSettings
+
+<body>
+    <div class="settings-container"> 
+        <div class="settings-box"> 
+
+            <h3>Background</h3>
+            @foreach (var background in new[] { "Login", "Member", "Secure", "Mainframe", "Classified", "Gateway" })
+            {
+                <div>
+                    <input type="radio" id="@background" value="@background" @onchange="OnBackgroundChanged" checked="@IsBackgroundChecked(background)" />
+                    <label for="@background">@background</label>
+                </div>
+            }
+
+            <h3>Target Color</h3>
+            @foreach (var color in new[] { "White", "Blue", "Red", "Green", "Yellow" })
+            {
+                <div>
+                    <input type="radio" id="@color" value="@color" @onchange="OnTargetColorChanged" checked="@IsTargetColorChecked(color)" />
+                    <label for="@color">@color</label>
+                </div>
+            }
+
+            <h3>Music Theme</h3>
+            @foreach (var music in new[] { "Member", "Secure", "Mainframe", "Classified", "Gateway" })
+            {
+                <div>
+                    <input type="radio" id="@music" value="@music" @onchange="OnMusicChoiceChanged" checked="@IsMusicChoiceChecked(music)" />
+                    <label for="@music">@music</label>
+                </div>
+            }
+
+            <button @onclick="TriggerEliteModeSettings">Start Elite Mode</button>
+        </div>
+    </div>
+
+<link href="css/EliteModeSettings.css?v=1.0" rel="stylesheet" />
+
+</body>
+
+
+
+@code {
+
+    [Parameter] public EventCallback OnBeginEliteMode { get; set; }
+    private void OnBackgroundChanged(ChangeEventArgs e)
+    {
+        EliteModeSettings.SelectedBackground = e.Value.ToString();
+    }
+
+    private void OnTargetColorChanged(ChangeEventArgs e)
+    {
+        EliteModeSettings.SelectedTargetColor = e.Value.ToString();
+    }
+
+    private void OnMusicChoiceChanged(ChangeEventArgs e)
+    {
+        EliteModeSettings.SelectedMusicChoice = e.Value.ToString();
+    }
+
+    private bool IsBackgroundChecked(string background)
+    {
+        return EliteModeSettings.SelectedBackground == background;
+    }
+
+    private bool IsTargetColorChecked(string color)
+    {
+        return EliteModeSettings.SelectedTargetColor == color;
+    }
+
+    private bool IsMusicChoiceChecked(string music)
+    {
+        return EliteModeSettings.SelectedMusicChoice == music;
+    }
+    private void TriggerEliteModeSettings()
+    {
+        OnBeginEliteMode.InvokeAsync(); // Trigger the event
+    }
+
+}

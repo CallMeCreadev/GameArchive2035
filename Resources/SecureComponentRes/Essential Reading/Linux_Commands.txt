@@ -1,0 +1,31 @@
+ls
+   Description: Lists the contents of a directory.
+   Usage: 
+     ls
+     This command shows files and directories in the current directory. You can use flags like -l for a detailed list or -a to show hidden files.
+
+cd
+   Description: Changes the current directory.
+   Usage: 
+     cd /path/to/directory
+     This command moves you to the specified directory. Using cd .. moves you up one directory level.
+
+clear
+    Description: Clears the terminal screen.
+    Usage:
+      This command clears all the text currently displayed in the terminal, giving you a clean screen. It doesn't delete any data or close any processes; 
+      it simply moves the command prompt to the top of the terminal window, making it easier to work without distractions.
+
+cat
+   Description: Concatenates and displays the contents of a file.
+   Usage: 
+     cat filename.txt
+     This command shows the contents of filename.txt in the terminal. It can also be used to concatenate multiple files.
+
+mv
+   Description: Moves or renames files and directories.
+   Usage: 
+     mv source.txt destination.txt
+     This command renames source.txt to destination.txt. It can also move files to a different directory.
+
+

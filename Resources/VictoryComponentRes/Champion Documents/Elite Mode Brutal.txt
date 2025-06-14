@@ -1,0 +1,13 @@
+You Have Unlocked a new gameplay mode:
+    Elite mode builds on the gameplay from level 5:
+        Time is set to 60 seconds and every wasd puzzle solve adds 24 seconds to the clock:        
+        after 5 solves the length of puzzles increases by 2
+        after 10 solves the length of puzzles increases by 4 and target spawn frequency is increased by 15%
+        after 15 solves the length of puzzles increases by 6
+        after 20 solves the length of puzzles increases by 8 and target spawn frequency is increased by 30%
+
+        This mode will continue scaling with target spawn rate increasing by 15% every 10 solves and puzzle length increasing by 2 every 5 solves
+
+        
+        To access the mode enter this passcode when accessing the ? folder in Membership
+        ConstructAdditionalPylons
