@@ -1,3 +1,7 @@
+You can access the Terminal by pressing the button in the lower left corner of the screen.
+Below are a list of commands that will be useful to you.
+Be sure to copy them or commit them to memory as they will be necessary should you access the Mainframe at a later date.
+
 ls
    Description: Lists the contents of a directory.
    Usage: 
@@ -9,7 +13,7 @@ cd
    Usage: 
      cd /path/to/directory
      This command moves you to the specified directory. Using cd .. moves you up one directory level.
-
+     
 clear
     Description: Clears the terminal screen.
     Usage:
