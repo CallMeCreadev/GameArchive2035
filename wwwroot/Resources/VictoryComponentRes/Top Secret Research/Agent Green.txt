@@ -1,12 +1,10 @@
 NODE ACCESS CARD
+----------------
 Designation: AGENT_GREEN
 Role: Coordinator
 
-Endpoint
+Endpoint:
+  IP Address: 157.180.92.87
 
-IP Address: 157.180.92.87
-
-Credential
-
-Password: BIsatdakiamhmvaotdIwcithawswhahwm320
-
+Credential:
+  Password: BIsatdakiamhmvaotdIwcithawswhahwm320
